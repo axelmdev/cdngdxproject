@@ -35,22 +35,23 @@ public class PlayScreen implements Screen {
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
-    private Stage clickListener;
+    private TiledMapStage clickListener;
 
 
     public PlayScreen(FightForGrades game){
         this.game = game;
 
         gamecam = new OrthographicCamera();
-        gamePort = new FitViewport( FightForGrades.V_WIDTH, FightForGrades.V_HEIGHT, gamecam);
+        gamePort = new FitViewport( FightForGrades.V_WIDTH / FightForGrades.PPM, FightForGrades.V_HEIGHT / FightForGrades.PPM, gamecam);
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("brick_test.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map);
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / FightForGrades.PPM);
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
         clickListener = new TiledMapStage(map);
+        clickListener.setViewport(gamePort);
         Gdx.input.setInputProcessor(clickListener);
     }
 

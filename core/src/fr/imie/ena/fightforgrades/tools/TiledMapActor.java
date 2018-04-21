@@ -3,6 +3,8 @@ package fr.imie.ena.fightforgrades.tools;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+
 
 /**
  * Created by nicol on 28/03/2018.
@@ -18,6 +20,10 @@ public class TiledMapActor extends Actor {
         this.tiledMap = tiledMap;
         this.tileLayer = tileLayer;
         this.cell = cell;
+    }
+
+    public void changeTile(TiledMapTileLayer.Cell cell){
+        cell.setTile(tiledMap.getTileSets().getTile(2));
     }
 
 }

@@ -32,7 +32,7 @@ public class Hud {
 
         testLabel = new Label("FIGHT FOR GRADES", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        table.add(testLabel).expandX().padTop(10);
+        table.add(testLabel).expandX();
         stage.addActor(table);
     }
 
