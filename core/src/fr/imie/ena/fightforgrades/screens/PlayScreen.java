@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import javax.swing.text.View;
 
 import fr.imie.ena.fightforgrades.FightForGrades;
+import fr.imie.ena.fightforgrades.character.Player;
 import fr.imie.ena.fightforgrades.scenes.Hud;
 import fr.imie.ena.fightforgrades.tools.TiledMapStage;
 
@@ -37,6 +39,9 @@ public class PlayScreen implements Screen {
 
     private TiledMapStage clickListener;
 
+    //Player
+    Player player;
+
 
     public PlayScreen(FightForGrades game){
         this.game = game;
@@ -50,7 +55,13 @@ public class PlayScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map, 1 / FightForGrades.PPM);
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
-        clickListener = new TiledMapStage(map);
+        //  Set player position
+        player = new Player("Player1", 2, 3,3);
+        TiledMapTileLayer tileId = (TiledMapTileLayer)map.getLayers().get(0);
+        TiledMapTileLayer.Cell cell = tileId.getCell(player.positionX, player.positionY);
+        cell.setTile(map.getTileSets().getTile(player.idTile));
+
+        clickListener = new TiledMapStage(map, player);
         clickListener.setViewport(gamePort);
         Gdx.input.setInputProcessor(clickListener);
     }

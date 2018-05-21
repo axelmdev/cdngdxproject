@@ -1,7 +1,11 @@
 package fr.imie.ena.fightforgrades.tools;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
+import fr.imie.ena.fightforgrades.character.Player;
 
 /**
  * Created by nicol on 28/03/2018.
@@ -9,17 +13,39 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class TiledMapClickListener extends ClickListener {
     private TiledMapActor actor;
+    private TiledMapTileLayer tiledLayer;
+    private Player player;
 
-    public TiledMapClickListener(TiledMapActor actor){
+    public TiledMapClickListener(TiledMapActor actor, TiledMapTileLayer tiledLayer, Player player){
         this.actor = actor;
+        this.tiledLayer = tiledLayer;
+        this.player = player;
     }
 
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        System.out.println(actor.cell +  " has been cliked");
-        System.out.println("cell x : " + actor.getX());
-        actor.changeTile(actor.cell);
+        //System.out.println(actor.cell +  " has been cliked");
+        //System.out.println("X " + (int)actor.cell. + " Y " + actor.cell.getTile().getOffsetY());
+
+        //Gdx.app.log("is cell", )
+
+       // System.out.println("cell tile id : " + actor.cell.getTile().getId());
+
+        if(actor.cell.getTile().getId() != 67){
+            //actor.changeTile(actor.cell, 2);
+            System.out.println("NOT PLAYER");
+            if(player.isMouvementCircle){
+                System.out.println("IS CIRCLE");
+                player.toggleMouvement(tiledLayer, 4, actor);
+            }
+
+
+        }else {
+            System.out.println("Player cell");
+            player.toggleMouvement(tiledLayer, 69, actor);
+        }
+
 
 
 
