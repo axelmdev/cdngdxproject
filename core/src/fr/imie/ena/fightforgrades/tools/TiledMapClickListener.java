@@ -32,18 +32,24 @@ public class TiledMapClickListener extends ClickListener {
 
        // System.out.println("cell tile id : " + actor.cell.getTile().getId());
 
-        if(actor.cell.getTile().getId() != 67){
-            //actor.changeTile(actor.cell, 2);
-            System.out.println("NOT PLAYER");
-            if(player.isMouvementCircle){
-                System.out.println("IS CIRCLE");
-                player.toggleMouvement(tiledLayer, 4, actor);
-            }
+        switch(actor.cell.getTile().getId()){
+            case 67:
+                System.out.println("Player cell");
+                player.toggleMouvement(tiledLayer, 69, actor);
+                break;
 
+            case 69:
+                System.out.println("Player mouvement");
+                player.move(actor.cell.getTile(), tiledLayer, actor);
+                break;
 
-        }else {
-            System.out.println("Player cell");
-            player.toggleMouvement(tiledLayer, 69, actor);
+            default:
+                //actor.changeTile(actor.cell, 2);
+                System.out.println("NOT PLAYER");
+                if(player.isMouvementCircle){
+                    System.out.println("IS CIRCLE");
+                    player.toggleMouvement(tiledLayer, 4, actor);
+                }
         }
 
 

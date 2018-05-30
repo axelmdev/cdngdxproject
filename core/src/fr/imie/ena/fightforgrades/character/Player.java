@@ -1,7 +1,10 @@
 package fr.imie.ena.fightforgrades.character;
 
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
+
+import fr.imie.ena.fightforgrades.FightForGrades;
 import fr.imie.ena.fightforgrades.tools.TiledMapActor;
 
 /**
@@ -22,6 +25,21 @@ public class Player {
         this.nbDeplacements = nbDeplacements;
         this.positionX = positionX;
         this.positionY = positionY;
+    }
+
+    public void move(TiledMapTile tile, TiledMapTileLayer tileLayer, TiledMapActor actor){
+        this.toggleMouvement(tileLayer, 4, actor);
+
+        TiledMapTileLayer.Cell previousCell = tileLayer.getCell(this.positionX, this.positionY);
+        TiledMapTileLayer.Cell cell = actor.cell;
+
+        actor.changeTile(previousCell, 4);
+        actor.changeTile(cell, 67);
+        this.positionX = (int)(actor.getX() * FightForGrades.PPM / tileLayer.getTileWidth());
+        this.positionY = (int)(actor.getY() * FightForGrades.PPM / tileLayer.getTileHeight());
+
+        System.out.println("New pos X : " + this.positionX + " pos Y : " + this.positionY);
+
     }
 
     // Toggle mouvement circle
