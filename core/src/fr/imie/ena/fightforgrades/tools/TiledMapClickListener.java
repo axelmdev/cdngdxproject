@@ -25,12 +25,6 @@ public class TiledMapClickListener extends ClickListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        //System.out.println(actor.cell +  " has been cliked");
-        //System.out.println("X " + (int)actor.cell. + " Y " + actor.cell.getTile().getOffsetY());
-
-        //Gdx.app.log("is cell", )
-
-       // System.out.println("cell tile id : " + actor.cell.getTile().getId());
 
         switch(actor.cell.getTile().getId()){
             case 67:
@@ -40,7 +34,7 @@ public class TiledMapClickListener extends ClickListener {
 
             case 69:
                 System.out.println("Player mouvement");
-                player.move(actor.cell.getTile(), tiledLayer, actor);
+                player.move(tiledLayer, actor);
                 break;
 
             default:

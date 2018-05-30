@@ -16,25 +16,36 @@ public class Player {
     public int nbDeplacements;
     public String name;
     public int idTile = 67;
+    public int previousPosX;
+    public int previousPosY;
     public int positionX;
     public int positionY;
     public boolean isMouvementCircle = false;
 
-    public Player(String name, int nbDeplacements, int positionX, int positionY){
+    public Player(String name, int deplacements, int positionX, int positionY){
         this.name = name;
-        this.nbDeplacements = nbDeplacements;
+        this.nbDeplacements = deplacements;
         this.positionX = positionX;
         this.positionY = positionY;
     }
 
-    public void move(TiledMapTile tile, TiledMapTileLayer tileLayer, TiledMapActor actor){
+    public void move(TiledMapTileLayer tileLayer, TiledMapActor actor){
+        // Remove mouvement circle
         this.toggleMouvement(tileLayer, 4, actor);
 
+        // Get concerned cells
         TiledMapTileLayer.Cell previousCell = tileLayer.getCell(this.positionX, this.positionY);
         TiledMapTileLayer.Cell cell = actor.cell;
 
+        // Update cell's tile
         actor.changeTile(previousCell, 4);
         actor.changeTile(cell, 67);
+
+        // Store previous positions
+        this.previousPosX = this.positionX;
+        this.previousPosY = this.positionY;
+
+        // Update to new positions
         this.positionX = (int)(actor.getX() * FightForGrades.PPM / tileLayer.getTileWidth());
         this.positionY = (int)(actor.getY() * FightForGrades.PPM / tileLayer.getTileHeight());
 
