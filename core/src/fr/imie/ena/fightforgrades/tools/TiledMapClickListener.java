@@ -40,7 +40,7 @@ public class TiledMapClickListener extends ClickListener {
             default:
                 //actor.changeTile(actor.cell, 2);
                 System.out.println("NOT PLAYER");
-                if(player.isMouvementCircle){
+                if(player.isMouvementCircle()){
                     System.out.println("IS CIRCLE");
                     player.toggleMouvement(tiledLayer, 4, actor);
                 }

@@ -31,8 +31,8 @@ public class TiledMapStage extends Stage {
     private void createActorForLayer(TiledMapTileLayer tiledLayer, Player player){
         for(int x = 0; x < tiledLayer.getWidth(); x++){
             for(int y = 0; y < tiledLayer.getHeight(); y++){
-                System.out.println("x : " + x * tiledLayer.getTileWidth() + " y : " + y * tiledLayer.getTileHeight());
-                System.out.println("width : " + tiledLayer.getTileWidth() + " height : " + tiledLayer.getTileHeight());
+               // System.out.println("x : " + x * tiledLayer.getTileWidth() + " y : " + y * tiledLayer.getTileHeight());
+               // System.out.println("width : " + tiledLayer.getTileWidth() + " height : " + tiledLayer.getTileHeight());
                 TiledMapTileLayer.Cell cell = tiledLayer.getCell(x, y);
 
                 TiledMapActor actor = new TiledMapActor(tiledMap, tiledLayer, cell);

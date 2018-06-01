@@ -1,6 +1,5 @@
 package fr.imie.ena.fightforgrades.character;
 
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
 
@@ -11,22 +10,17 @@ import fr.imie.ena.fightforgrades.tools.TiledMapActor;
  * Created by nicol on 25/04/2018.
  */
 
-public class Player {
+public class Player extends Character {
 
-    public int nbDeplacements;
-    public String name;
-    public int idTile = 67;
-    public int previousPosX;
-    public int previousPosY;
-    public int positionX;
-    public int positionY;
-    public boolean isMouvementCircle = false;
+    private TiledMapTileLayer.Cell cell;
+    private boolean isMouvementCircle = false;
 
-    public Player(String name, int deplacements, int positionX, int positionY){
+    public Player(String name, int deplacements, int positionX, int positionY, int idTile){
         this.name = name;
-        this.nbDeplacements = deplacements;
+        this.deplacements = deplacements;
         this.positionX = positionX;
         this.positionY = positionY;
+        this.idTile = idTile;
     }
 
     public void move(TiledMapTileLayer tileLayer, TiledMapActor actor){
@@ -34,12 +28,14 @@ public class Player {
         this.toggleMouvement(tileLayer, 4, actor);
 
         // Get concerned cells
-        TiledMapTileLayer.Cell previousCell = tileLayer.getCell(this.positionX, this.positionY);
+        TiledMapTileLayer.Cell previousCell = cell;
         TiledMapTileLayer.Cell cell = actor.cell;
 
         // Update cell's tile
         actor.changeTile(previousCell, 4);
         actor.changeTile(cell, 67);
+
+        this.cell = cell;
 
         // Store previous positions
         this.previousPosX = this.positionX;
@@ -57,68 +53,68 @@ public class Player {
     public void toggleMouvement(TiledMapTileLayer tiledLayer, int tileId, TiledMapActor actor){
 
         // Upper right quarter
-        for(int i = 0; i <= this.nbDeplacements; i++){
-            for(int j = 0; j <= this.nbDeplacements - i; j++){
+        for(int i = 0; i <= this.deplacements; i++){
+            for(int j = 0; j <= this.deplacements - i; j++){
                 if(i == 0){
                     if(j != 0){
                         TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX + j, this.positionY + i);
-                        if(cell != null)
+                        if(cell != null && cell.getTile().getId() != 199)
                             actor.changeTile(cell, tileId);
                     }
                 }else{
                     TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX + j, this.positionY + i);
-                    if(cell != null)
+                    if(cell != null && cell.getTile().getId() != 199)
                         actor.changeTile(cell, tileId);
                 }
             }
         }
 
         // down right quarter
-        for(int i = 0; i <= this.nbDeplacements; i++){
-            for(int j = 0; j <= this.nbDeplacements - i; j++){
+        for(int i = 0; i <= this.deplacements; i++){
+            for(int j = 0; j <= this.deplacements - i; j++){
                 if( i == 0){
                     if(j != 0){
                         TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX + j, this.positionY - i);
-                        if(cell != null)
+                        if(cell != null && cell.getTile().getId() != 199)
                             actor.changeTile(cell, tileId);
                     }
                 }else{
                     TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX + j, this.positionY - i);
-                    if(cell != null)
+                    if(cell != null && cell.getTile().getId() != 199)
                         actor.changeTile(cell, tileId);
                 }
             }
         }
 
         // down left quarter
-        for(int i = 0; i <= this.nbDeplacements; i++){
-            for(int j = 0; j <= this.nbDeplacements - i; j++){
+        for(int i = 0; i <= this.deplacements; i++){
+            for(int j = 0; j <= this.deplacements - i; j++){
                 if( i == 0){
                     if(j != 0){
                         TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX - j, this.positionY - i);
-                        if(cell != null)
+                        if(cell != null && cell.getTile().getId() != 199)
                             actor.changeTile(cell, tileId);
                     }
                 }else{
                     TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX - j, this.positionY - i);
-                    if(cell != null)
+                    if(cell != null && cell.getTile().getId() != 199)
                         actor.changeTile(cell, tileId);
                 }
             }
         }
 
         // upper left quarter
-        for(int i = 0; i <= this.nbDeplacements; i++){
-            for(int j = 0; j <= this.nbDeplacements - i; j++){
+        for(int i = 0; i <= this.deplacements; i++){
+            for(int j = 0; j <= this.deplacements - i; j++){
                 if( i == 0){
                     if(j != 0){
                         TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX - j, this.positionY + i);
-                        if(cell != null)
+                        if(cell != null && cell.getTile().getId() != 199)
                             actor.changeTile(cell, tileId);
                     }
                 }else{
                     TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX - j, this.positionY + i);
-                    if(cell != null)
+                    if(cell != null && cell.getTile().getId() != 199)
                         actor.changeTile(cell, tileId);
                 }
             }
@@ -129,4 +125,24 @@ public class Player {
         else
             this.isMouvementCircle = true;
     }
+
+    public boolean isMouvementCircle() {
+        return isMouvementCircle;
+    }
+    public void setMouvementCircle(boolean mouvementCircle) {
+        isMouvementCircle = mouvementCircle;
+    }
+
+
+    public TiledMapTileLayer.Cell getCell() {
+        return cell;
+    }
+
+    public void setCell(TiledMapTileLayer.Cell cell) {
+        this.cell = cell;
+    }
+
+
+
+
 }

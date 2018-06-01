@@ -4,18 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import javax.swing.text.View;
-
 import fr.imie.ena.fightforgrades.FightForGrades;
+import fr.imie.ena.fightforgrades.character.Enemy;
 import fr.imie.ena.fightforgrades.character.Player;
 import fr.imie.ena.fightforgrades.scenes.Hud;
 import fr.imie.ena.fightforgrades.tools.TiledMapStage;
@@ -41,6 +38,7 @@ public class PlayScreen implements Screen {
 
     //Player
     Player player;
+    Enemy ennemy;
 
 
     public PlayScreen(FightForGrades game){
@@ -55,11 +53,20 @@ public class PlayScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map, 1 / FightForGrades.PPM);
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
-        //  Set player position
-        player = new Player("Player1", 2, 3,3);
         TiledMapTileLayer tileId = (TiledMapTileLayer)map.getLayers().get(0);
+
+        //  Set player position
+        player = new Player("Player1", 2, 3,3, 67);
         TiledMapTileLayer.Cell cell = tileId.getCell(player.positionX, player.positionY);
         cell.setTile(map.getTileSets().getTile(player.idTile));
+        player.setCell(cell);
+
+        // Set ennemy position
+        ennemy = new Enemy("Ennemy1", 2, 13, 3, 199);
+        TiledMapTileLayer.Cell ennemyCell = tileId.getCell(ennemy.positionX, ennemy.positionY);
+        ennemyCell.setTile(map.getTileSets().getTile(ennemy.idTile));
+        ennemy.setCell(ennemyCell);
+
 
         clickListener = new TiledMapStage(map, player);
         clickListener.setViewport(gamePort);
