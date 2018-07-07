@@ -4,16 +4,11 @@ import android.app.Activity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Net;
 import com.badlogic.gdx.Net.HttpMethods;
 import com.badlogic.gdx.Net.HttpRequest;
-import com.badlogic.gdx.Net.HttpResponseListener;
-import com.badlogic.gdx.net.HttpParametersUtils;
 import com.badlogic.gdx.net.HttpRequestBuilder;
-import com.badlogic.gdx.utils.Base64Coder;
-
-import java.io.Console;
+import com.ffg.Controller.WebManager;
+import com.ffg.Models.Accounts;
 
 /**
  * Created by edern on 29/05/2018.
@@ -48,8 +43,9 @@ public class CallAPI extends Activity {
             }
 
             public void failed(Throwable t) {
-                System.out.println("Réponse PAS ok : ");
+                System.out.println("Réponse PAS ok : " + t.getMessage());
                 Gdx.app.log("WebRequest", "HTTP request failed");
+
             }
 
             public void cancelled() {
