@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/GdxTheme" >
         <activity
-            android:name="com.ffg.CallAPI"
+            android:name="com.ffg.AndroidLauncher"
             android:label="@string/app_name" 
             android:screenOrientation="landscape"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize">
@@ -20,5 +20,6 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

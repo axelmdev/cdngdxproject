@@ -35,16 +35,11 @@ public class CallAPI extends Activity {
         launch();
     }
 
-    public void launch()
-    {
+    public void launch() {
 
         int tototo = 3;
 
-        HttpRequest request = requestBuilder.newRequest().method(HttpMethods.GET).url("http://www.google.com").build(); //new HttpRequest(HttpMethods.GET,);
-        request.setUrl("http://www.google.fr");
-        request.setHeader("Content-Type", "application/json");
-        request.setHeader("Accept", "application/json");
-        Gdx.net.sendHttpRequest(request,new HttpResponseListener() {
+        Net.HttpResponseListener testhrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 System.out.println("Réponse ok : ");
                 Gdx.app.log("WebRequest", "HTTP Response code: " + httpResponse.getStatus().getStatusCode());
@@ -57,23 +52,23 @@ public class CallAPI extends Activity {
                 Gdx.app.log("WebRequest", "HTTP request failed");
             }
 
-            @Override
             public void cancelled() {
                 System.out.println("Réponse Cancelled : ");
                 Gdx.app.log("WebRequest", "HTTP request cancelled");
             }
-        });
+        };
+
+        HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
+        /*Net.HttpRequest httpRequestPOST = requestBuilder.newRequest().method(Net.HttpMethods.POST).url("http://51.68.122.241:3000/api/oiseaux").build();
+        httpRequestPOST.setHeader("Content-Type", "application/json");
+        httpRequestPOST.setContent("{ \"name\": \"deux\",\"nbPlume\": 2}");
+        Gdx.net.sendHttpRequest(httpRequestPOST, testhrl);*/
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url("http://51.68.122.241:3000/api/oiseaux").build();
+        //Map parameters = new HashMap();
+        //parameters.put("access_token", "kkZfiw8lGBsFOBm4pmsfIsP6ZoFqMRRHCMyFcohdIdQc0oME803uTofLRzRFDRWq");
+        //parameters.put("Accept","application/json");
+        //httpRequest.setContent(HttpParametersUtils.convertHttpParameters(parameters));
+        Gdx.net.sendHttpRequest(httpRequest, testhrl);
         int toto = 1;
     }
-    //Gdx.net.sendHttpRequest(httpRequest, httpResponseListener);
-
-/*Gdx.net.sendHttpRequest (httpPost, new HttpResponseListener() {
-        public void handleHttpResponse(HttpResponse httpResponse) {
-            status = httpResponse.getResultAsString();
-        }
-
-    public void failed(Throwable t) {
-        status = "failed";
-    }
-});*/
 }
