@@ -7,8 +7,13 @@ import com.badlogic.gdx.Net;
 import com.badlogic.gdx.Net.HttpMethods;
 import com.badlogic.gdx.Net.HttpRequest;
 import com.badlogic.gdx.net.HttpRequestBuilder;
-import com.ffg.Controller.WebManager;
-import com.ffg.Models.Accounts;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.ffg.Models.Account;
+import com.ffg.Models.Character;
+import com.ffg.Models.Oiseau;
+import com.ffg.WebManager.OiseauWebManager;
+
+import java.util.ArrayList;
 
 /**
  * Created by edern on 29/05/2018.
@@ -32,9 +37,14 @@ public class CallAPI extends Activity {
 
     public void launch() {
 
+        OiseauWebManager oiseauWebManager = new OiseauWebManager();
+        ArrayList<Oiseau> oiseaux = oiseauWebManager.GetMany();
+        //Oiseau oiseau = oiseauWebManager.GetOne();
+
+
         int tototo = 3;
 
-        Net.HttpResponseListener testhrl = new Net.HttpResponseListener() {
+        /*Net.HttpResponseListener testhrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 System.out.println("Réponse ok : ");
                 Gdx.app.log("WebRequest", "HTTP Response code: " + httpResponse.getStatus().getStatusCode());
@@ -52,19 +62,19 @@ public class CallAPI extends Activity {
                 System.out.println("Réponse Cancelled : ");
                 Gdx.app.log("WebRequest", "HTTP request cancelled");
             }
-        };
+        };*/
 
-        HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
+        //HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
         /*Net.HttpRequest httpRequestPOST = requestBuilder.newRequest().method(Net.HttpMethods.POST).url("http://51.68.122.241:3000/api/oiseaux").build();
         httpRequestPOST.setHeader("Content-Type", "application/json");
         httpRequestPOST.setContent("{ \"name\": \"deux\",\"nbPlume\": 2}");
         Gdx.net.sendHttpRequest(httpRequestPOST, testhrl);*/
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url("http://51.68.122.241:3000/api/oiseaux").build();
+        //Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url("http://51.68.122.241:3000/api/oiseaux").build();
         //Map parameters = new HashMap();
         //parameters.put("access_token", "kkZfiw8lGBsFOBm4pmsfIsP6ZoFqMRRHCMyFcohdIdQc0oME803uTofLRzRFDRWq");
         //parameters.put("Accept","application/json");
         //httpRequest.setContent(HttpParametersUtils.convertHttpParameters(parameters));
-        Gdx.net.sendHttpRequest(httpRequest, testhrl);
+        //Gdx.net.sendHttpRequest(httpRequest, testhrl);
         int toto = 1;
     }
 }
