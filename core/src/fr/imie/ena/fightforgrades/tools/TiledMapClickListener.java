@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import fr.imie.ena.fightforgrades.character.Enemy;
 import fr.imie.ena.fightforgrades.character.Player;
 
 /**
@@ -15,11 +16,13 @@ public class TiledMapClickListener extends ClickListener {
     private TiledMapActor actor;
     private TiledMapTileLayer tiledLayer;
     private Player player;
+    private Enemy enemy;
 
-    public TiledMapClickListener(TiledMapActor actor, TiledMapTileLayer tiledLayer, Player player){
+    public TiledMapClickListener(TiledMapActor actor, TiledMapTileLayer tiledLayer, Player player, Enemy enemy){
         this.actor = actor;
         this.tiledLayer = tiledLayer;
         this.player = player;
+        this.enemy = enemy;
     }
 
 
@@ -35,6 +38,7 @@ public class TiledMapClickListener extends ClickListener {
             case 69:
                 System.out.println("Player mouvement");
                 player.move(tiledLayer, actor);
+                enemy.move(tiledLayer, actor, player);
                 break;
 
             default:

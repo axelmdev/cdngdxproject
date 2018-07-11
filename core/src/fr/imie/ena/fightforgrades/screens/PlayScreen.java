@@ -68,7 +68,7 @@ public class PlayScreen implements Screen {
         ennemy.setCell(ennemyCell);
 
 
-        clickListener = new TiledMapStage(map, player);
+        clickListener = new TiledMapStage(map, player, ennemy);
         clickListener.setViewport(gamePort);
         Gdx.input.setInputProcessor(clickListener);
     }

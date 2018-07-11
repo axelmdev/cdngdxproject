@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import fr.imie.ena.fightforgrades.FightForGrades;
+import fr.imie.ena.fightforgrades.character.Enemy;
 import fr.imie.ena.fightforgrades.character.Player;
 
 /**
@@ -16,10 +17,12 @@ import fr.imie.ena.fightforgrades.character.Player;
 public class TiledMapStage extends Stage {
     private TiledMap tiledMap;
     private Player player;
+    private Enemy enemy;
 
-    public TiledMapStage(TiledMap tiledMap, Player player){
+    public TiledMapStage(TiledMap tiledMap, Player player, Enemy enemy){
         this.tiledMap = tiledMap;
         this.player = player;
+        this.enemy = enemy;
 
         for(MapLayer layer : tiledMap.getLayers()){
 
@@ -43,7 +46,7 @@ public class TiledMapStage extends Stage {
 
                 actor.setBounds((x * tiledLayer.getTileWidth()) / FightForGrades.PPM, (y * tiledLayer.getTileHeight()) / FightForGrades.PPM, tiledLayer.getTileWidth() / FightForGrades.PPM, tiledLayer.getTileHeight() / FightForGrades.PPM);
                 addActor(actor);
-                EventListener eventListener = new TiledMapClickListener(actor, tiledLayer, player);
+                EventListener eventListener = new TiledMapClickListener(actor, tiledLayer, player, enemy);
                 actor.addListener(eventListener);
             }
         }
