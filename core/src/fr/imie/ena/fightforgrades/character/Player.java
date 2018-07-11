@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
 
 import fr.imie.ena.fightforgrades.FightForGrades;
+import fr.imie.ena.fightforgrades.scenes.Hud;
 import fr.imie.ena.fightforgrades.tools.TiledMapActor;
 
 /**
@@ -14,13 +15,21 @@ public class Player extends Character {
 
     private TiledMapTileLayer.Cell cell;
     private boolean isMouvementCircle = false;
+    private Hud hud;
 
-    public Player(String name, int deplacements, int positionX, int positionY, int idTile){
+    public Player(String name, int deplacements, int positionX, int positionY, int idTile, Hud hud){
         this.name = name;
         this.deplacements = deplacements;
         this.positionX = positionX;
         this.positionY = positionY;
         this.idTile = idTile;
+        this.hud = hud;
+    }
+
+    public void play(){
+
+        this.hud.turnNumber = this.hud.turnNumber + 1;
+        this.hud.updateTurn(this.hud.turnNumber);
     }
 
     public void move(TiledMapTileLayer tileLayer, TiledMapActor actor){

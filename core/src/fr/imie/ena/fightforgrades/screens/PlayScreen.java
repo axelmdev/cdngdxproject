@@ -56,7 +56,7 @@ public class PlayScreen implements Screen {
         TiledMapTileLayer tileId = (TiledMapTileLayer)map.getLayers().get(0);
 
         //  Set player position
-        player = new Player("Player1", 2, 3,3, 67);
+        player = new Player("Player1", 2, 3,3, 67, hud);
         TiledMapTileLayer.Cell cell = tileId.getCell(player.positionX, player.positionY);
         cell.setTile(map.getTileSets().getTile(player.idTile));
         player.setCell(cell);
@@ -88,6 +88,7 @@ public class PlayScreen implements Screen {
 
         gamecam.update();
         renderer.setView(gamecam);
+        hud.stage.draw();
     }
 
     @Override

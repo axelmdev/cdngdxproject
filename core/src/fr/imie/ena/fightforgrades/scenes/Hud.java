@@ -18,6 +18,8 @@ import fr.imie.ena.fightforgrades.FightForGrades;
 
 public class Hud {
     public Stage stage;
+    public Label turnLabel;
+    public int turnNumber = 0;
     private Viewport viewport;
 
     Label testLabel;
@@ -30,10 +32,14 @@ public class Hud {
         table.top();
         table.setFillParent(true);
 
-        testLabel = new Label("FIGHT FOR GRADES", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        turnLabel = new Label("TURN : "+this.turnNumber, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        table.add(testLabel).expandX();
+        table.add(turnLabel).expandX();
         stage.addActor(table);
+    }
+
+    public void updateTurn(int turnNumber){
+        turnLabel.setText("TURN : "+turnNumber);
     }
 
 }
