@@ -17,5 +17,7 @@ public abstract class Character {
     public int previousPosY;
     public int positionX;
     public int positionY;
+    public int hp;
+    public int strenght;
 
 }

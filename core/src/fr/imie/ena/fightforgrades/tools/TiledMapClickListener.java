@@ -38,8 +38,13 @@ public class TiledMapClickListener extends ClickListener {
             case 69:
                 System.out.println("Player mouvement");
                 player.move(tiledLayer, actor);
-                enemy.move(tiledLayer, actor, player);
+                enemy.turn(tiledLayer, actor, player);
                 break;
+
+            case 199:
+                System.out.println("Enemy !");
+                player.attack(enemy);
+                enemy.turn(tiledLayer, actor, player);
 
             default:
                 //actor.changeTile(actor.cell, 2);

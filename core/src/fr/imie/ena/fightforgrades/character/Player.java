@@ -15,14 +15,17 @@ public class Player extends Character {
 
     private TiledMapTileLayer.Cell cell;
     private boolean isMouvementCircle = false;
+    private boolean enemyInCircle = true;
     private Hud hud;
 
-    public Player(String name, int deplacements, int positionX, int positionY, int idTile, Hud hud){
+    public Player(String name, int deplacements, int hp, int strenght, int positionX, int positionY, int idTile, Hud hud){
         this.name = name;
         this.deplacements = deplacements;
         this.positionX = positionX;
         this.positionY = positionY;
         this.idTile = idTile;
+        this.hp = hp;
+        this.strenght = strenght;
         this.hud = hud;
     }
 
@@ -58,6 +61,18 @@ public class Player extends Character {
 
     }
 
+    public void attack(Enemy enemy){
+        if(this.enemyInCircle){
+            if(enemy.hp >= this.strenght)
+                enemy.hp = enemy.hp - this.strenght;
+            else
+                enemy.hp = 0;
+
+            System.out.println("Enemy hp : " + enemy.hp);
+
+        }
+    }
+
     // Toggle mouvement circle
     public void toggleMouvement(TiledMapTileLayer tiledLayer, int tileId, TiledMapActor actor){
 
@@ -67,13 +82,19 @@ public class Player extends Character {
                 if(i == 0){
                     if(j != 0){
                         TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX + j, this.positionY + i);
-                        if(cell != null && cell.getTile().getId() != 199)
+                        if(cell != null && cell.getTile().getId() != 199){
                             actor.changeTile(cell, tileId);
+                        }else {
+                            this.enemyInCircle = true;
+                        }
                     }
                 }else{
                     TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX + j, this.positionY + i);
-                    if(cell != null && cell.getTile().getId() != 199)
+                    if(cell != null && cell.getTile().getId() != 199){
                         actor.changeTile(cell, tileId);
+                    }else {
+                        this.enemyInCircle = true;
+                    }
                 }
             }
         }
@@ -84,13 +105,19 @@ public class Player extends Character {
                 if( i == 0){
                     if(j != 0){
                         TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX + j, this.positionY - i);
-                        if(cell != null && cell.getTile().getId() != 199)
+                        if(cell != null && cell.getTile().getId() != 199){
                             actor.changeTile(cell, tileId);
+                        }else {
+                            this.enemyInCircle = true;
+                        }
                     }
                 }else{
                     TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX + j, this.positionY - i);
-                    if(cell != null && cell.getTile().getId() != 199)
+                    if(cell != null && cell.getTile().getId() != 199){
                         actor.changeTile(cell, tileId);
+                    }else {
+                        this.enemyInCircle = true;
+                    }
                 }
             }
         }
@@ -101,13 +128,19 @@ public class Player extends Character {
                 if( i == 0){
                     if(j != 0){
                         TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX - j, this.positionY - i);
-                        if(cell != null && cell.getTile().getId() != 199)
+                        if(cell != null && cell.getTile().getId() != 199){
                             actor.changeTile(cell, tileId);
+                        }else {
+                            this.enemyInCircle = true;
+                        }
                     }
                 }else{
                     TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX - j, this.positionY - i);
-                    if(cell != null && cell.getTile().getId() != 199)
+                    if(cell != null && cell.getTile().getId() != 199){
                         actor.changeTile(cell, tileId);
+                    }else {
+                        this.enemyInCircle = true;
+                    }
                 }
             }
         }
@@ -118,13 +151,20 @@ public class Player extends Character {
                 if( i == 0){
                     if(j != 0){
                         TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX - j, this.positionY + i);
-                        if(cell != null && cell.getTile().getId() != 199)
+                        if(cell != null && cell.getTile().getId() != 199){
                             actor.changeTile(cell, tileId);
+                        }else {
+                            this.enemyInCircle = true;
+                        }
+
                     }
                 }else{
                     TiledMapTileLayer.Cell cell = tiledLayer.getCell(this.positionX - j, this.positionY + i);
-                    if(cell != null && cell.getTile().getId() != 199)
+                    if(cell != null && cell.getTile().getId() != 199){
                         actor.changeTile(cell, tileId);
+                    }else {
+                        this.enemyInCircle = true;
+                    }
                 }
             }
         }
