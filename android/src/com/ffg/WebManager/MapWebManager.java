@@ -5,36 +5,33 @@ import com.badlogic.gdx.Net;
 import com.badlogic.gdx.net.HttpRequestBuilder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.ffg.DAL.AccountDAO;
-import com.ffg.Models.Account;
+import com.ffg.DAL.MapDAO;
+import com.ffg.Models.Map;
 
 import java.util.ArrayList;
 
 /**
- * Created by edern on 09/07/2018.
+ * Created by edern on 12/07/2018.
  */
 
-public class AccountWebManager implements BaseWebManager<Account> {
+public class MapWebManager implements BaseWebManager<Map> {
 
-    private String modelNameUrlVersion = Account.GetNameUrlVersion();
+    private String modelNameUrlVersion = Map.GetNameUrlVersion();
 
     @Override
-    public Account GetOne(String id) {
-
+    public Map GetOne(String id) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 String responseStringValue = httpResponse.getResultAsString();
                 Gdx.app.log("WebRequest", "HTTP Response code: " + httpResponse.getStatus().getStatusCode());
                 Gdx.app.log("WebRequest", "HTTP Response code: " + responseStringValue);
                 Json json = new Json();
-                JsonValue accountJson = json.fromJson(JsonValue.class,responseStringValue);
-                Account newAccount = new Account();
-                newAccount.setPseudo(accountJson.getString("pseudo"));
-                newAccount.setMail(accountJson.getString("mail"));
-                newAccount.setPwd(accountJson.getString("pwd"));
-                //newAccount.setGame(accountJson.getString("pseudo"));
-                AccountDAO accountDAO = new AccountDAO();
-                accountDAO.Insert(newAccount);
+                JsonValue mapJson = json.fromJson(JsonValue.class,responseStringValue);
+                Map newMap = new Map();
+                newMap.setName(mapJson.getString("name"));
+                //newSkill.setCaseList(mapJson.getInt("Damage"));
+                MapDAO mapDAO = new MapDAO();
+                mapDAO.Insert(newMap);
             }
 
             public void failed(Throwable t) {
@@ -56,26 +53,23 @@ public class AccountWebManager implements BaseWebManager<Account> {
     }
 
     @Override
-    public ArrayList<Account> GetMany() {
-
+    public ArrayList<Map> GetMany() {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 String responseStringValue = httpResponse.getResultAsString();
                 Gdx.app.log("WebRequest", "HTTP Response code: " + httpResponse.getStatus().getStatusCode());
                 Gdx.app.log("WebRequest", "HTTP Response code: " + responseStringValue);
                 Json json = new Json();
-                ArrayList<JsonValue> accountsJson = json.fromJson(ArrayList.class,responseStringValue);
-                ArrayList<Account> accounts = new ArrayList<>();
-                for (JsonValue accountJson : accountsJson) {
-                    Account newAccount = new Account();
-                    newAccount.setPseudo(accountJson.getString("pseudo"));
-                    newAccount.setMail(accountJson.getString("mail"));
-                    newAccount.setPwd(accountJson.getString("pwd"));
-                    //newAccount.setGame(accountJson.getString("pseudo"));
-                    accounts.add(newAccount);
+                ArrayList<JsonValue> mapsJson = json.fromJson(ArrayList.class,responseStringValue);
+                ArrayList<Map> maps = new ArrayList<>();
+                for (JsonValue mapJson : mapsJson) {
+                    Map newMap = new Map();
+                    newMap.setName(mapJson.getString("name"));
+                    //newSkill.setCaseList(mapJson.getInt("Damage"));
+                    maps.add(newMap);
                 }
-                AccountDAO accountDAO = new AccountDAO();
-                accountDAO.InsertMany(accounts);
+                MapDAO mapDAO = new MapDAO();
+                mapDAO.InsertMany(maps);
             }
 
             public void failed(Throwable t) {
@@ -97,14 +91,12 @@ public class AccountWebManager implements BaseWebManager<Account> {
     }
 
     @Override
-    public boolean PostOne(Account itemToPost) {
+    public boolean PostOne(Map itemToPost) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 String responseStringValue = httpResponse.getResultAsString();
                 Gdx.app.log("WebRequest", "HTTP Response code: " + httpResponse.getStatus().getStatusCode());
                 Gdx.app.log("WebRequest", "HTTP Response code: " + responseStringValue);
-                Json json = new Json();
-                Boolean aBoolean = json.fromJson(Boolean.class,responseStringValue);
             }
 
             public void failed(Throwable t) {
@@ -124,13 +116,11 @@ public class AccountWebManager implements BaseWebManager<Account> {
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemToPost));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
-
         return true;
     }
 
     @Override
-    public boolean PostMany(ArrayList<Account> itemsToPost) {
-
+    public boolean PostMany(ArrayList<Map> itemsToPost) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 String responseStringValue = httpResponse.getResultAsString();
@@ -161,7 +151,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
     }
 
     @Override
-    public boolean PutOne(Account itemToPut) {
+    public boolean PutOne(Map itemToPut) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 String responseStringValue = httpResponse.getResultAsString();
@@ -193,7 +183,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
     }
 
     @Override
-    public boolean PutMany(ArrayList<Account> itemsToPut) {
+    public boolean PutMany(ArrayList<Map> itemsToPut) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -225,7 +215,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
     }
 
     @Override
-    public boolean DeleteOne(Account itemToDelete) {
+    public boolean DeleteOne(Map itemToDelete) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 String responseStringValue = httpResponse.getResultAsString();
@@ -257,7 +247,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
     }
 
     @Override
-    public boolean DeleteMany(ArrayList<Account> itemsToDelete) {
+    public boolean DeleteMany(ArrayList<Map> itemsToDelete) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {

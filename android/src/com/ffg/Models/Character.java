@@ -9,14 +9,27 @@ import java.util.ArrayList;
  */
 
 public class Character {
+
     private String name;
     private ArrayList<Sentence> sentenceList;
 
-    public ArrayList<Sentence> getSentencesList() {
+    public static String GetNameUrlVersion(){
+        return "Characters";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Sentence> getSentenceList() {
         return sentenceList;
     }
 
-    public void setSentencesList(ArrayList<Sentence> sentencesList) {
-        this.sentenceList = sentencesList;
+    public void setSentenceList(ArrayList<Sentence> sentenceList) {
+        this.sentenceList = sentenceList;
     }
 }

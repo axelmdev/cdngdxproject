@@ -5,21 +5,21 @@ import com.badlogic.gdx.Net;
 import com.badlogic.gdx.net.HttpRequestBuilder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.ffg.DAL.AccountDAO;
-import com.ffg.Models.Account;
+import com.ffg.DAL.CharacterDAO;
+import com.ffg.Models.Character;
 
 import java.util.ArrayList;
 
 /**
- * Created by edern on 09/07/2018.
+ * Created by edern on 12/07/2018.
  */
 
-public class AccountWebManager implements BaseWebManager<Account> {
+public class CharacterWebManager implements BaseWebManager<Character> {
 
-    private String modelNameUrlVersion = Account.GetNameUrlVersion();
+    private String modelNameUrlVersion = Character.GetNameUrlVersion();
 
     @Override
-    public Account GetOne(String id) {
+    public Character GetOne(String id) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -27,14 +27,12 @@ public class AccountWebManager implements BaseWebManager<Account> {
                 Gdx.app.log("WebRequest", "HTTP Response code: " + httpResponse.getStatus().getStatusCode());
                 Gdx.app.log("WebRequest", "HTTP Response code: " + responseStringValue);
                 Json json = new Json();
-                JsonValue accountJson = json.fromJson(JsonValue.class,responseStringValue);
-                Account newAccount = new Account();
-                newAccount.setPseudo(accountJson.getString("pseudo"));
-                newAccount.setMail(accountJson.getString("mail"));
-                newAccount.setPwd(accountJson.getString("pwd"));
-                //newAccount.setGame(accountJson.getString("pseudo"));
-                AccountDAO accountDAO = new AccountDAO();
-                accountDAO.Insert(newAccount);
+                JsonValue characterJson = json.fromJson(JsonValue.class,responseStringValue);
+                Character newCharacter = new Character();
+                newCharacter.setName(characterJson.getString("name"));
+                //newCharacter.setSentenceList(characterJson.getString("name"));
+                CharacterDAO characterDAO = new CharacterDAO();
+                characterDAO.Insert(newCharacter);
             }
 
             public void failed(Throwable t) {
@@ -56,7 +54,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
     }
 
     @Override
-    public ArrayList<Account> GetMany() {
+    public ArrayList<Character> GetMany() {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -64,18 +62,16 @@ public class AccountWebManager implements BaseWebManager<Account> {
                 Gdx.app.log("WebRequest", "HTTP Response code: " + httpResponse.getStatus().getStatusCode());
                 Gdx.app.log("WebRequest", "HTTP Response code: " + responseStringValue);
                 Json json = new Json();
-                ArrayList<JsonValue> accountsJson = json.fromJson(ArrayList.class,responseStringValue);
-                ArrayList<Account> accounts = new ArrayList<>();
-                for (JsonValue accountJson : accountsJson) {
-                    Account newAccount = new Account();
-                    newAccount.setPseudo(accountJson.getString("pseudo"));
-                    newAccount.setMail(accountJson.getString("mail"));
-                    newAccount.setPwd(accountJson.getString("pwd"));
-                    //newAccount.setGame(accountJson.getString("pseudo"));
-                    accounts.add(newAccount);
+                ArrayList<JsonValue> charactersJson = json.fromJson(ArrayList.class,responseStringValue);
+                ArrayList<Character> characters = new ArrayList<>();
+                for (JsonValue characterJson : charactersJson) {
+                    Character newCharacter = new Character();
+                    newCharacter.setName(characterJson.getString("content"));
+                    //newCharacter.setSentenceList(characterJson.getString("content"));
+                    characters.add(newCharacter);
                 }
-                AccountDAO accountDAO = new AccountDAO();
-                accountDAO.InsertMany(accounts);
+                CharacterDAO characterDAO = new CharacterDAO();
+                characterDAO.InsertMany(characters);
             }
 
             public void failed(Throwable t) {
@@ -97,7 +93,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
     }
 
     @Override
-    public boolean PostOne(Account itemToPost) {
+    public boolean PostOne(Character itemToPost) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 String responseStringValue = httpResponse.getResultAsString();
@@ -129,7 +125,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
     }
 
     @Override
-    public boolean PostMany(ArrayList<Account> itemsToPost) {
+    public boolean PostMany(ArrayList<Character> itemsToPost) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -161,7 +157,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
     }
 
     @Override
-    public boolean PutOne(Account itemToPut) {
+    public boolean PutOne(Character itemToPut) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 String responseStringValue = httpResponse.getResultAsString();
@@ -193,7 +189,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
     }
 
     @Override
-    public boolean PutMany(ArrayList<Account> itemsToPut) {
+    public boolean PutMany(ArrayList<Character> itemsToPut) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -225,7 +221,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
     }
 
     @Override
-    public boolean DeleteOne(Account itemToDelete) {
+    public boolean DeleteOne(Character itemToDelete) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 String responseStringValue = httpResponse.getResultAsString();
@@ -257,7 +253,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
     }
 
     @Override
-    public boolean DeleteMany(ArrayList<Account> itemsToDelete) {
+    public boolean DeleteMany(ArrayList<Character> itemsToDelete) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {

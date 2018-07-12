@@ -2,15 +2,10 @@ package com.ffg;
 
 import android.app.Activity;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.Net.HttpMethods;
 import com.badlogic.gdx.Net.HttpRequest;
 import com.badlogic.gdx.net.HttpRequestBuilder;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.ffg.Models.Account;
-import com.ffg.Models.Character;
-import com.ffg.Models.Oiseau;
 import com.ffg.WebManager.OiseauWebManager;
 
 import java.util.ArrayList;

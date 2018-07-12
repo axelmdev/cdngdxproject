@@ -6,4 +6,16 @@ package com.ffg.Models;
 
 public class Sentence {
     private String content;
+
+    public static String GetNameUrlVersion(){
+        return "Sentences";
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }
