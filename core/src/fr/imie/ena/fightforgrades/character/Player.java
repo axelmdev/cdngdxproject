@@ -27,6 +27,8 @@ public class Player extends Character {
         this.hp = hp;
         this.strenght = strenght;
         this.hud = hud;
+
+        hud.updateHp(this.hp, true);
     }
 
     public void play(){
@@ -72,6 +74,7 @@ public class Player extends Character {
 
             System.out.println("Enemy hp : " + enemy.hp);
 
+            hud.updateHp(enemy.hp, false);
             enemy.turn(tiledLayer, actor, this);
 
         }else{
