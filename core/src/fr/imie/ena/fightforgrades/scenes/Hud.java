@@ -19,7 +19,7 @@ import fr.imie.ena.fightforgrades.FightForGrades;
 public class Hud {
     public Stage stage;
     public Label turnLabel;
-    public int turnNumber = 0;
+    public int turnNumber = 1;
     private Viewport viewport;
 
     Label testLabel;
