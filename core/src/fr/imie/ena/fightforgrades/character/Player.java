@@ -35,7 +35,7 @@ public class Player extends Character {
         this.hud.updateTurn(this.hud.turnNumber);
     }
 
-    public void move(TiledMapTileLayer tileLayer, TiledMapActor actor){
+    public void move(TiledMapTileLayer tileLayer, TiledMapActor actor, Enemy enemy){
         // Remove mouvement circle
         this.toggleMouvement(tileLayer, 4, actor);
 
@@ -59,9 +59,11 @@ public class Player extends Character {
 
         System.out.println("New pos X : " + this.positionX + " pos Y : " + this.positionY);
 
+        enemy.turn(tileLayer, actor, this);
+
     }
 
-    public void attack(Enemy enemy){
+    public void attack(TiledMapTileLayer tiledLayer, TiledMapActor actor, Enemy enemy){
         if(this.enemyInRange){
             if(enemy.hp >= this.strenght)
                 enemy.hp = enemy.hp - this.strenght;
@@ -69,6 +71,8 @@ public class Player extends Character {
                 enemy.hp = 0;
 
             System.out.println("Enemy hp : " + enemy.hp);
+
+            enemy.turn(tiledLayer, actor, this);
 
         }else{
             System.out.println("Cannot attack");
