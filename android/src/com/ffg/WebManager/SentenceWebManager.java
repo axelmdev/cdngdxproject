@@ -1,12 +1,16 @@
 package com.ffg.WebManager;
 
+import android.app.Activity;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.net.HttpRequestBuilder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.ffg.DAL.SentenceDAO;
+import com.ffg.Models.Character;
 import com.ffg.Models.Sentence;
+import com.ffg.R;
 
 import java.util.ArrayList;
 
@@ -14,12 +18,30 @@ import java.util.ArrayList;
  * Created by edern on 12/07/2018.
  */
 
-public class SentenceWebManager implements BaseWebManager<Sentence> {
+public class SentenceWebManager extends Activity {
 
     private String modelNameUrlVersion = Sentence.GetNameUrlVersion();
+    private String characterNameUrlVersion = Character.GetNameUrlVersion();
+    private String baseUrl = getString(R.string.apiBaseUrl);
 
-    @Override
-    public Sentence GetOne(String id) {
+    public static Sentence GetOneFromJson(JsonValue jsonValue){
+            Sentence sentence = new Sentence();
+            sentence.setMongoID(jsonValue.getString("id"));
+            sentence.setCharacterMongoID(jsonValue.getString("characterMongoID"));
+            sentence.setContent(jsonValue.getString("content"));
+            return sentence;
+    }
+
+    public static ArrayList<Sentence> GetManyFromJson(ArrayList<JsonValue> jsonValue){
+        ArrayList<Sentence> allSentences = new ArrayList<>();
+        for (JsonValue sentenceJson : jsonValue) {
+            allSentences.add(GetOneFromJson(sentenceJson));
+        }
+        return allSentences;
+    }
+
+
+    public Sentence GetOne(String characterId, String id) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -28,10 +50,8 @@ public class SentenceWebManager implements BaseWebManager<Sentence> {
                 Gdx.app.log("WebRequest", "HTTP Response code: " + responseStringValue);
                 Json json = new Json();
                 JsonValue sentenceJson = json.fromJson(JsonValue.class,responseStringValue);
-                Sentence newSentence = new Sentence();
-                newSentence.setContent(sentenceJson.getString("content"));
                 SentenceDAO sentenceDAO = new SentenceDAO();
-                sentenceDAO.Insert(newSentence);
+                sentenceDAO.Insert(GetOneFromJson(sentenceJson));
             }
 
             public void failed(Throwable t) {
@@ -47,13 +67,13 @@ public class SentenceWebManager implements BaseWebManager<Sentence> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/" + id).build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url(baseUrl + characterNameUrlVersion + "/" + characterId + "/" + modelNameUrlVersion + "/" + id).build();
         Gdx.net.sendHttpRequest(httpRequest, hrl);
         return null;
     }
 
-    @Override
-    public ArrayList<Sentence> GetMany() {
+
+    public ArrayList<Sentence> GetMany(String characterId) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -62,14 +82,8 @@ public class SentenceWebManager implements BaseWebManager<Sentence> {
                 Gdx.app.log("WebRequest", "HTTP Response code: " + responseStringValue);
                 Json json = new Json();
                 ArrayList<JsonValue> sentencesJson = json.fromJson(ArrayList.class,responseStringValue);
-                ArrayList<Sentence> sentences = new ArrayList<>();
-                for (JsonValue sentenceJson : sentencesJson) {
-                    Sentence newSentence = new Sentence();
-                    newSentence.setContent(sentenceJson.getString("content"));
-                    sentences.add(newSentence);
-                }
                 SentenceDAO sentenceDAO = new SentenceDAO();
-                sentenceDAO.InsertMany(sentences);
+                sentenceDAO.InsertMany(GetManyFromJson(sentencesJson));
             }
 
             public void failed(Throwable t) {
@@ -85,12 +99,12 @@ public class SentenceWebManager implements BaseWebManager<Sentence> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url(baseUrl + characterNameUrlVersion + "/" + characterId + "/" + modelNameUrlVersion).build();
         Gdx.net.sendHttpRequest(httpRequest, hrl);
         return null;
     }
 
-    @Override
+
     public boolean PostOne(Sentence itemToPost) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -114,7 +128,7 @@ public class SentenceWebManager implements BaseWebManager<Sentence> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.POST).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.POST).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemToPost));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
@@ -122,7 +136,7 @@ public class SentenceWebManager implements BaseWebManager<Sentence> {
         return true;
     }
 
-    @Override
+
     public boolean PostMany(ArrayList<Sentence> itemsToPost) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
@@ -147,14 +161,14 @@ public class SentenceWebManager implements BaseWebManager<Sentence> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.POST).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.POST).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemsToPost));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
         return true;
     }
 
-    @Override
+
     public boolean PutOne(Sentence itemToPut) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -178,7 +192,7 @@ public class SentenceWebManager implements BaseWebManager<Sentence> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.PUT).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.PUT).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemToPut));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
@@ -186,7 +200,7 @@ public class SentenceWebManager implements BaseWebManager<Sentence> {
         return true;
     }
 
-    @Override
+
     public boolean PutMany(ArrayList<Sentence> itemsToPut) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
@@ -211,14 +225,14 @@ public class SentenceWebManager implements BaseWebManager<Sentence> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.PUT).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.PUT).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemsToPut));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
         return true;
     }
 
-    @Override
+
     public boolean DeleteOne(Sentence itemToDelete) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -242,7 +256,7 @@ public class SentenceWebManager implements BaseWebManager<Sentence> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.DELETE).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.DELETE).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemToDelete));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
@@ -250,7 +264,7 @@ public class SentenceWebManager implements BaseWebManager<Sentence> {
         return true;
     }
 
-    @Override
+
     public boolean DeleteMany(ArrayList<Sentence> itemsToDelete) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
@@ -275,7 +289,7 @@ public class SentenceWebManager implements BaseWebManager<Sentence> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.DELETE).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.DELETE).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemsToDelete));
         Gdx.net.sendHttpRequest(httpRequest, hrl);

@@ -6,7 +6,6 @@ import com.badlogic.gdx.Net;
 import com.badlogic.gdx.Net.HttpMethods;
 import com.badlogic.gdx.Net.HttpRequest;
 import com.badlogic.gdx.net.HttpRequestBuilder;
-import com.ffg.WebManager.OiseauWebManager;
 
 import java.util.ArrayList;
 
@@ -32,8 +31,6 @@ public class CallAPI extends Activity {
 
     public void launch() {
 
-        OiseauWebManager oiseauWebManager = new OiseauWebManager();
-        ArrayList<Oiseau> oiseaux = oiseauWebManager.GetMany();
         //Oiseau oiseau = oiseauWebManager.GetOne();
 
 

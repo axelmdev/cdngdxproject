@@ -32,6 +32,9 @@ public class AccountWebManager implements BaseWebManager<Account> {
                 newAccount.setPseudo(accountJson.getString("pseudo"));
                 newAccount.setMail(accountJson.getString("mail"));
                 newAccount.setPwd(accountJson.getString("pwd"));
+
+
+
                 //newAccount.setGame(accountJson.getString("pseudo"));
                 AccountDAO accountDAO = new AccountDAO();
                 accountDAO.Insert(newAccount);
@@ -50,7 +53,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/" + id).build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url(baseUrl + modelNameUrlVersion + "/" + id).build();
         Gdx.net.sendHttpRequest(httpRequest, hrl);
         return null;
     }
@@ -91,7 +94,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url(baseUrl + modelNameUrlVersion + "/").build();
         Gdx.net.sendHttpRequest(httpRequest, hrl);
         return null;
     }
@@ -120,7 +123,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.POST).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.POST).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemToPost));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
@@ -153,7 +156,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.POST).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.POST).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemsToPost));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
@@ -184,7 +187,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.PUT).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.PUT).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemToPut));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
@@ -217,7 +220,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.PUT).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.PUT).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemsToPut));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
@@ -248,7 +251,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.DELETE).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.DELETE).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemToDelete));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
@@ -281,7 +284,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.DELETE).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.DELETE).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemsToDelete));
         Gdx.net.sendHttpRequest(httpRequest, hrl);

@@ -7,11 +7,29 @@ import java.util.ArrayList;
  */
 
 public class Map {
+    private String mongoID;
+    private String gameMongoID;
     private String name;
     private ArrayList<Case> caseList;
 
     public static String GetNameUrlVersion(){
         return "Maps";
+    }
+
+    public String getMongoID() {
+        return mongoID;
+    }
+
+    public void setMongoID(String mongoID) {
+        this.mongoID = mongoID;
+    }
+
+    public String getGameMongoID() {
+        return gameMongoID;
+    }
+
+    public void setGameMongoID(String gameMongoID) {
+        this.gameMongoID = gameMongoID;
     }
 
     public String getName() {

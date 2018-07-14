@@ -7,6 +7,8 @@ import java.util.ArrayList;
  */
 
 public class ActiveCharacter extends Character {
+    private String mongoID;
+    private String gameMongoID;
     private int level;
     private int statsLife;
     private int statsAttack;
@@ -19,6 +21,26 @@ public class ActiveCharacter extends Character {
 
     public static String GetNameUrlVersion(){
         return "ActiveCharacters";
+    }
+
+    @Override
+    public String getMongoID() {
+        return mongoID;
+    }
+
+    @Override
+    public void setMongoID(String mongoID) {
+        this.mongoID = mongoID;
+    }
+
+    @Override
+    public String getGameMongoID() {
+        return gameMongoID;
+    }
+
+    @Override
+    public void setGameMongoID(String gameMongoID) {
+        this.gameMongoID = gameMongoID;
     }
 
     public int getLevel() {

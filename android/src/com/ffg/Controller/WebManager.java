@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class WebManager<T> {
 
-    private String baseUrl = "http://51.68.122.241:3000/api/";
+    private String baseUrl = baseUrl;
     boolean gotResponse = false;
     ArrayList<T> result = new ArrayList<>();
 

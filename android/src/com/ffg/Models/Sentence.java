@@ -5,10 +5,28 @@ package com.ffg.Models;
  */
 
 public class Sentence {
+    private String mongoID;
+    private String characterMongoID;
     private String content;
 
     public static String GetNameUrlVersion(){
         return "Sentences";
+    }
+
+    public String getMongoID() {
+        return mongoID;
+    }
+
+    public void setMongoID(String mongoID) {
+        this.mongoID = mongoID;
+    }
+
+    public String getCharacterMongoID() {
+        return characterMongoID;
+    }
+
+    public void setCharacterMongoID(String characterMongoID) {
+        this.characterMongoID = characterMongoID;
     }
 
     public String getContent() {

@@ -10,11 +10,29 @@ import java.util.ArrayList;
 
 public class Character {
 
+    private String mongoID;
+    private String gameMongoID;
     private String name;
     private ArrayList<Sentence> sentenceList;
 
     public static String GetNameUrlVersion(){
         return "Characters";
+    }
+
+    public String getMongoID() {
+        return mongoID;
+    }
+
+    public void setMongoID(String mongoID) {
+        this.mongoID = mongoID;
+    }
+
+    public String getGameMongoID() {
+        return gameMongoID;
+    }
+
+    public void setGameMongoID(String gameMongoID) {
+        this.gameMongoID = gameMongoID;
     }
 
     public String getName() {

@@ -1,12 +1,16 @@
 package com.ffg.WebManager;
 
+import android.app.Activity;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.net.HttpRequestBuilder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.ffg.DAL.MapDAO;
+import com.ffg.Models.Game;
 import com.ffg.Models.Map;
+import com.ffg.R;
 
 import java.util.ArrayList;
 
@@ -14,12 +18,33 @@ import java.util.ArrayList;
  * Created by edern on 12/07/2018.
  */
 
-public class MapWebManager implements BaseWebManager<Map> {
+public class MapWebManager extends Activity {
 
     private String modelNameUrlVersion = Map.GetNameUrlVersion();
+    private String gameNameUrlVersion = Game.GetNameUrlVersion();
+    private String baseUrl = getString(R.string.apiBaseUrl);
 
-    @Override
-    public Map GetOne(String id) {
+    public static Map GetOneFromJson(JsonValue jsonValue){
+        Map map = new Map();
+        map.setMongoID(jsonValue.getString("id"));
+        map.setGameMongoID(jsonValue.getString("gameMongoID"));
+        map.setName(jsonValue.getString("name"));
+
+        CaseWebManager caseWebManager = new CaseWebManager();
+        map.setCaseList(caseWebManager.GetMany(map.getMongoID()));
+        return map;
+    }
+
+    public static ArrayList<Map> GetManyFromJson(ArrayList<JsonValue> jsonValue){
+        ArrayList<Map> allMaps = new ArrayList<>();
+        for (JsonValue mapJson : jsonValue) {
+            allMaps.add(GetOneFromJson(mapJson));
+        }
+        return allMaps;
+    }
+
+
+    public Map GetOne(String gameID, String id) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 String responseStringValue = httpResponse.getResultAsString();
@@ -27,11 +52,8 @@ public class MapWebManager implements BaseWebManager<Map> {
                 Gdx.app.log("WebRequest", "HTTP Response code: " + responseStringValue);
                 Json json = new Json();
                 JsonValue mapJson = json.fromJson(JsonValue.class,responseStringValue);
-                Map newMap = new Map();
-                newMap.setName(mapJson.getString("name"));
-                //newSkill.setCaseList(mapJson.getInt("Damage"));
                 MapDAO mapDAO = new MapDAO();
-                mapDAO.Insert(newMap);
+                mapDAO.Insert(GetOneFromJson(mapJson));
             }
 
             public void failed(Throwable t) {
@@ -47,13 +69,13 @@ public class MapWebManager implements BaseWebManager<Map> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/" + id).build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url(baseUrl + gameNameUrlVersion + "/" + gameID + "/" + modelNameUrlVersion + "/" + id).build();
         Gdx.net.sendHttpRequest(httpRequest, hrl);
         return null;
     }
 
-    @Override
-    public ArrayList<Map> GetMany() {
+
+    public ArrayList<Map> GetMany(String gameID) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 String responseStringValue = httpResponse.getResultAsString();
@@ -61,15 +83,8 @@ public class MapWebManager implements BaseWebManager<Map> {
                 Gdx.app.log("WebRequest", "HTTP Response code: " + responseStringValue);
                 Json json = new Json();
                 ArrayList<JsonValue> mapsJson = json.fromJson(ArrayList.class,responseStringValue);
-                ArrayList<Map> maps = new ArrayList<>();
-                for (JsonValue mapJson : mapsJson) {
-                    Map newMap = new Map();
-                    newMap.setName(mapJson.getString("name"));
-                    //newSkill.setCaseList(mapJson.getInt("Damage"));
-                    maps.add(newMap);
-                }
                 MapDAO mapDAO = new MapDAO();
-                mapDAO.InsertMany(maps);
+                mapDAO.InsertMany(GetManyFromJson(mapsJson));
             }
 
             public void failed(Throwable t) {
@@ -85,12 +100,12 @@ public class MapWebManager implements BaseWebManager<Map> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url(baseUrl + gameNameUrlVersion + "/" + gameID + "/" + modelNameUrlVersion + "/").build();
         Gdx.net.sendHttpRequest(httpRequest, hrl);
         return null;
     }
 
-    @Override
+
     public boolean PostOne(Map itemToPost) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -112,14 +127,14 @@ public class MapWebManager implements BaseWebManager<Map> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.POST).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.POST).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemToPost));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
         return true;
     }
 
-    @Override
+
     public boolean PostMany(ArrayList<Map> itemsToPost) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -143,14 +158,14 @@ public class MapWebManager implements BaseWebManager<Map> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.POST).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.POST).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemsToPost));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
         return true;
     }
 
-    @Override
+
     public boolean PutOne(Map itemToPut) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -174,7 +189,7 @@ public class MapWebManager implements BaseWebManager<Map> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.PUT).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.PUT).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemToPut));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
@@ -182,7 +197,7 @@ public class MapWebManager implements BaseWebManager<Map> {
         return true;
     }
 
-    @Override
+
     public boolean PutMany(ArrayList<Map> itemsToPut) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
@@ -207,14 +222,14 @@ public class MapWebManager implements BaseWebManager<Map> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.PUT).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.PUT).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemsToPut));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
         return true;
     }
 
-    @Override
+
     public boolean DeleteOne(Map itemToDelete) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -238,7 +253,7 @@ public class MapWebManager implements BaseWebManager<Map> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.DELETE).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.DELETE).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemToDelete));
         Gdx.net.sendHttpRequest(httpRequest, hrl);
@@ -246,7 +261,7 @@ public class MapWebManager implements BaseWebManager<Map> {
         return true;
     }
 
-    @Override
+
     public boolean DeleteMany(ArrayList<Map> itemsToDelete) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
@@ -271,7 +286,7 @@ public class MapWebManager implements BaseWebManager<Map> {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.DELETE).url("http://51.68.122.241:3000/api/" + modelNameUrlVersion + "/").build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.DELETE).url(baseUrl + modelNameUrlVersion + "/").build();
         Json json = new Json();
         httpRequest.setContent(json.toJson(itemsToDelete));
         Gdx.net.sendHttpRequest(httpRequest, hrl);

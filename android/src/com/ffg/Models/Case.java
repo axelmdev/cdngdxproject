@@ -5,11 +5,29 @@ package com.ffg.Models;
  */
 
 public class Case {
+    private String mongoID;
+    private String mapMongoID;
     private boolean usable;
     private String img;
 
     public static String GetNameUrlVersion(){
         return "Cases";
+    }
+
+    public String getMongoID() {
+        return mongoID;
+    }
+
+    public void setMongoID(String mongoID) {
+        this.mongoID = mongoID;
+    }
+
+    public String getMapMongoID() {
+        return mapMongoID;
+    }
+
+    public void setMapMongoID(String mapMongoID) {
+        this.mapMongoID = mapMongoID;
     }
 
     public boolean isUsable() {

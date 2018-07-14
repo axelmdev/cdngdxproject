@@ -5,6 +5,7 @@ package com.ffg.Models;
  */
 
 public class Account {
+    private String mongoID;
     private String pseudo;
     private String mail;
     private String pwd;
@@ -12,6 +13,14 @@ public class Account {
 
     public static String GetNameUrlVersion(){
         return "Accounts";
+    }
+
+    public String getMongoID() {
+        return mongoID;
+    }
+
+    public void setMongoID(String mongoID) {
+        this.mongoID = mongoID;
     }
 
     public String getPseudo() {
