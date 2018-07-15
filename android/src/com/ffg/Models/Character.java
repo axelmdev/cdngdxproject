@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class Character {
 
+    private int liteID;
+    private String gameLiteID;
     private String mongoID;
     private String gameMongoID;
     private String name;
@@ -17,6 +19,22 @@ public class Character {
 
     public static String GetNameUrlVersion(){
         return "Characters";
+    }
+
+    public int getLiteID() {
+        return liteID;
+    }
+
+    public void setLiteID(int liteID) {
+        this.liteID = liteID;
+    }
+
+    public String getGameLiteID() {
+        return gameLiteID;
+    }
+
+    public void setGameLiteID(String gameLiteID) {
+        this.gameLiteID = gameLiteID;
     }
 
     public String getMongoID() {

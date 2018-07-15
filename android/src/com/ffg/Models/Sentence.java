@@ -5,12 +5,30 @@ package com.ffg.Models;
  */
 
 public class Sentence {
+    private int liteID;
+    private String characterLiteID;
     private String mongoID;
     private String characterMongoID;
     private String content;
 
     public static String GetNameUrlVersion(){
         return "Sentences";
+    }
+
+    public int getLiteID() {
+        return liteID;
+    }
+
+    public void setLiteID(int liteID) {
+        this.liteID = liteID;
+    }
+
+    public String getCharacterLiteID() {
+        return characterLiteID;
+    }
+
+    public void setCharacterLiteID(String characterLiteID) {
+        this.characterLiteID = characterLiteID;
     }
 
     public String getMongoID() {

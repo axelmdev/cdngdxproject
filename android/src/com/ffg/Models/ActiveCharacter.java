@@ -7,7 +7,8 @@ import java.util.ArrayList;
  */
 
 public class ActiveCharacter extends Character {
-    private String mongoID;
+    private int liteID;
+    private String gameLiteID;
     private String gameMongoID;
     private int level;
     private int statsLife;
@@ -23,14 +24,20 @@ public class ActiveCharacter extends Character {
         return "ActiveCharacters";
     }
 
-    @Override
-    public String getMongoID() {
-        return mongoID;
+    public int getLiteID() {
+        return liteID;
     }
 
-    @Override
-    public void setMongoID(String mongoID) {
-        this.mongoID = mongoID;
+    public void setLiteID(int liteID) {
+        this.liteID = liteID;
+    }
+
+    public String getGameLiteID() {
+        return gameLiteID;
+    }
+
+    public void setGameLiteID(String gameLiteID) {
+        this.gameLiteID = gameLiteID;
     }
 
     @Override

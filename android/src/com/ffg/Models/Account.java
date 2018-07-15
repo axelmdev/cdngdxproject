@@ -5,6 +5,7 @@ package com.ffg.Models;
  */
 
 public class Account {
+    private int liteID;
     private String mongoID;
     private String pseudo;
     private String mail;
@@ -15,9 +16,15 @@ public class Account {
         return "Accounts";
     }
 
-    public String getMongoID() {
-        return mongoID;
+    public int getLiteID() {
+        return liteID;
     }
+
+    public void setLiteID(int liteID) {
+        this.liteID = liteID;
+    }
+
+    public String getMongoID() { return mongoID; }
 
     public void setMongoID(String mongoID) {
         this.mongoID = mongoID;

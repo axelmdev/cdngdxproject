@@ -1,5 +1,7 @@
 package com.ffg.WebManager;
 
+import android.app.Activity;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.net.HttpRequestBuilder;
@@ -7,6 +9,7 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.ffg.DAL.AccountDAO;
 import com.ffg.Models.Account;
+import com.ffg.R;
 
 import java.util.ArrayList;
 
@@ -14,11 +17,12 @@ import java.util.ArrayList;
  * Created by edern on 09/07/2018.
  */
 
-public class AccountWebManager implements BaseWebManager<Account> {
+public class AccountWebManager extends Activity {
 
     private String modelNameUrlVersion = Account.GetNameUrlVersion();
+    private String baseUrl = getString(R.string.apiBaseUrl);
 
-    @Override
+
     public Account GetOne(String id) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
@@ -58,7 +62,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         return null;
     }
 
-    @Override
+
     public ArrayList<Account> GetMany() {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
@@ -99,7 +103,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         return null;
     }
 
-    @Override
+
     public boolean PostOne(Account itemToPost) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -131,7 +135,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         return true;
     }
 
-    @Override
+
     public boolean PostMany(ArrayList<Account> itemsToPost) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
@@ -163,7 +167,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         return true;
     }
 
-    @Override
+
     public boolean PutOne(Account itemToPut) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -195,7 +199,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         return true;
     }
 
-    @Override
+
     public boolean PutMany(ArrayList<Account> itemsToPut) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
@@ -227,7 +231,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         return true;
     }
 
-    @Override
+
     public boolean DeleteOne(Account itemToDelete) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
@@ -259,7 +263,7 @@ public class AccountWebManager implements BaseWebManager<Account> {
         return true;
     }
 
-    @Override
+
     public boolean DeleteMany(ArrayList<Account> itemsToDelete) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {

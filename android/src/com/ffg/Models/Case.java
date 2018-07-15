@@ -5,6 +5,8 @@ package com.ffg.Models;
  */
 
 public class Case {
+    private int liteID;
+    private String mapLiteID;
     private String mongoID;
     private String mapMongoID;
     private boolean usable;
@@ -12,6 +14,22 @@ public class Case {
 
     public static String GetNameUrlVersion(){
         return "Cases";
+    }
+
+    public int getLiteID() {
+        return liteID;
+    }
+
+    public void setLiteID(int liteID) {
+        this.liteID = liteID;
+    }
+
+    public String getMapLiteID() {
+        return mapLiteID;
+    }
+
+    public void setMapLiteID(String mapLiteID) {
+        this.mapLiteID = mapLiteID;
     }
 
     public String getMongoID() {

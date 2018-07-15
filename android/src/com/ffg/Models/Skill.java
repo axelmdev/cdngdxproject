@@ -5,6 +5,8 @@ package com.ffg.Models;
  */
 
 public class Skill {
+    private int liteID;
+    private String activeCharacterLiteID;
     private String mongoID;
     private String activeCharacterMongoID;
     private String name;
@@ -12,6 +14,22 @@ public class Skill {
 
     public static String GetNameUrlVersion(){
         return "Skills";
+    }
+
+    public int getLiteID() {
+        return liteID;
+    }
+
+    public void setLiteID(int liteID) {
+        this.liteID = liteID;
+    }
+
+    public String getActiveCharacterLiteID() {
+        return activeCharacterLiteID;
+    }
+
+    public void setActiveCharacterLiteID(String activeCharacterLiteID) {
+        this.activeCharacterLiteID = activeCharacterLiteID;
     }
 
     public String getMongoID() {

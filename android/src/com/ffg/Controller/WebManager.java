@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class WebManager<T> {
 
-    private String baseUrl = baseUrl;
+    private String baseUrl = "";
     boolean gotResponse = false;
     ArrayList<T> result = new ArrayList<>();
 

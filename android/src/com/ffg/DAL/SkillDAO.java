@@ -9,6 +9,17 @@ import java.util.ArrayList;
  */
 
 public class SkillDAO implements BaseDAO<Skill> {
+    public static final String TABLE_NAME = "skill_table";
+    public static final String COL_ID = "id_skill";
+    public static final String COL_NAME = "name";
+    public static final String COL_DAMAGE = "damage";
+    public static final String COL_MONGOID = "mongoID";
+
+    public static String GetCreationString() {
+        String query = "create table " + TABLE_NAME +" ("+COL_ID+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "+COL_NAME+" TEXT, "+COL_DAMAGE+" INTEGER, "+COL_MONGOID+" TEXT NOT NULL)";
+        return query;
+    }
+
     @Override
     public void Insert(Skill itemToInsert) {
 

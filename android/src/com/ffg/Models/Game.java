@@ -1,15 +1,14 @@
 package com.ffg.Models;
 
-import com.badlogic.gdx.scenes.scene2d.ui.List;
-
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by edern on 07/07/2018.
  */
 
 public class Game {
+    private int id;
+    private String accountLiteID;
     private String mongoID;
     private String accountMongoID;
     private ArrayList<Map> mapList;
@@ -18,6 +17,22 @@ public class Game {
 
     public static String GetNameUrlVersion(){
         return "Games";
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getAccountLiteID() {
+        return accountLiteID;
+    }
+
+    public void setAccountLiteID(String accountLiteID) {
+        this.accountLiteID = accountLiteID;
     }
 
     public String getMongoID() {
