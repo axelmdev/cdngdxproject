@@ -18,22 +18,49 @@ import fr.imie.ena.fightforgrades.FightForGrades;
 
 public class Hud {
     public Stage stage;
+    private Label turnLabel;
+    private Label playerHpLabel;
+    private Label enemyHpLabel;
+    public int turnNumber = 1;
+    public int playerHp = 1;
+    public int enemyHp = 1;
     private Viewport viewport;
-
-    Label testLabel;
 
     public Hud(SpriteBatch sb){
         viewport = new FitViewport(FightForGrades.V_WIDTH, FightForGrades.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
-        Table table = new Table();
-        table.top();
-        table.setFillParent(true);
+        turnLabel = new Label("TURN : "+this.turnNumber, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        playerHpLabel = new Label("Player HP : "+this.playerHp, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        enemyHpLabel = new Label("Player HP : "+this.enemyHp, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        testLabel = new Label("FIGHT FOR GRADES", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Table tableTop = new Table();
+        tableTop.top();
+        tableTop.setFillParent(true);
+        tableTop.add(turnLabel).expandX();
 
-        table.add(testLabel).expandX().padTop(10);
-        stage.addActor(table);
+
+        Table tableBottom = new Table();
+        tableBottom.bottom();
+        tableBottom.setFillParent(true);
+
+        tableBottom.add(playerHpLabel).expandX();
+        tableBottom.add(enemyHpLabel).expandX();
+
+        stage.addActor(tableTop);
+        stage.addActor(tableBottom);
+    }
+
+    public void updateTurn(int turnNumber){
+        turnLabel.setText("TURN : "+turnNumber);
+    }
+
+    public void updateHp(int HP, boolean isPlayer){
+        if(isPlayer){
+            playerHpLabel.setText("Player HP : "+HP);
+        }else{
+            enemyHpLabel.setText("Enemy HP : "+HP);
+        }
     }
 
 }
