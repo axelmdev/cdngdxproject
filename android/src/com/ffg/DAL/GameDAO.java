@@ -21,43 +21,44 @@ public class GameDAO implements BaseDAO<Game>
         query += ",CONSTRAINT Game_Account_AK UNIQUE ("+COL_IDACC+")";
         return query;
     }
-    @Override
-    public void Insert(Game itemToInsert) {
-        System.out.println("Insertion : Game");
-    }
 
     @Override
-    public void InsertMany(ArrayList<Game> itemsToInsert) {
+    public void Insert(Game itemToInsert, DBHelper dbContext) {
 
     }
 
     @Override
-    public Game SelectOne(ArrayList<String> parameters) {
+    public void InsertMany(ArrayList<Game> itemsToInsert, DBHelper dbContext) {
+
+    }
+
+    @Override
+    public Game SelectOne(String id, DBHelper dbContext) {
         return null;
     }
 
     @Override
-    public ArrayList<Game> SelectMany(ArrayList<String> parameters) {
+    public ArrayList<Game> SelectMany(DBHelper dbContext) {
         return null;
     }
 
     @Override
-    public void Update(Game itemToUpdate) {
+    public void Update(Game itemToUpdate, DBHelper dbContext) {
 
     }
 
     @Override
-    public void UpdateMany(ArrayList<Game> itemToUpdate) {
+    public void UpdateMany(ArrayList<Game> itemToUpdate, DBHelper dbContext) {
 
     }
 
     @Override
-    public void DeleteOne(Game itemToDelete) {
+    public void DeleteOne(Game itemToDelete, DBHelper dbContext) {
 
     }
 
     @Override
-    public void DeleteMany(ArrayList<Game> itemsToDelete) {
+    public void DeleteMany(ArrayList<Game> itemsToDelete, DBHelper dbContext) {
 
     }
 }

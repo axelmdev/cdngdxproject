@@ -7,6 +7,7 @@ import com.badlogic.gdx.Net;
 import com.badlogic.gdx.net.HttpRequestBuilder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.ffg.DAL.DBHelper;
 import com.ffg.DAL.GameDAO;
 import com.ffg.Models.Account;
 import com.ffg.Models.Game;
@@ -62,7 +63,7 @@ public class GameWebManager extends Activity {
                 Json json = new Json();
                 JsonValue gameJson = json.fromJson(JsonValue.class,responseStringValue);
                 GameDAO gameDAO = new GameDAO();
-                gameDAO.Insert(GetOneFromJson(gameJson));
+                gameDAO.Insert(GetOneFromJson(gameJson),new DBHelper(gameWebManagerContext));
             }
 
             public void failed(Throwable t) {
@@ -93,7 +94,7 @@ public class GameWebManager extends Activity {
                 Json json = new Json();
                 ArrayList<JsonValue> gamesJson = json.fromJson(ArrayList.class,responseStringValue);
                 GameDAO gameDAO = new GameDAO();
-                gameDAO.InsertMany(GetManyFromJson(gamesJson));
+                gameDAO.InsertMany(GetManyFromJson(gamesJson),new DBHelper(gameWebManagerContext));
             }
 
             public void failed(Throwable t) {
