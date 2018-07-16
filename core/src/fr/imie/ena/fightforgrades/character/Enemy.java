@@ -1,8 +1,10 @@
 package fr.imie.ena.fightforgrades.character;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
 import fr.imie.ena.fightforgrades.scenes.Hud;
+import fr.imie.ena.fightforgrades.screens.GameOverScreen;
 import fr.imie.ena.fightforgrades.tools.TiledMapActor;
 
 /**
@@ -13,8 +15,9 @@ public class Enemy extends Character {
 
     private TiledMapTileLayer.Cell cell;
     private Hud hud;
+    private Game game;
 
-    public Enemy(String name, int deplacements, int hp, int strenght, int positionX, int positionY, int idTile, Hud hud){
+    public Enemy(String name, int deplacements, int hp, int strenght, int positionX, int positionY, int idTile, Hud hud, Game game){
         this.name = name;
         this.deplacements = deplacements;
         this.positionX = positionX;
@@ -23,6 +26,7 @@ public class Enemy extends Character {
         this.hp = hp;
         this.strenght = strenght;
         this.hud = hud;
+        this.game = game;
 
         hud.updateHp(this.hp, false);
     }
@@ -32,7 +36,13 @@ public class Enemy extends Character {
 
         if(!asMove){
             this.attack(player);
-            player.play();
+            if(player.hp == 0){
+                game.setScreen(new GameOverScreen(game));
+                //dispose();
+            }else{
+                player.play();
+            }
+
         }
     }
 

@@ -56,13 +56,13 @@ public class PlayScreen implements Screen {
         TiledMapTileLayer tileId = (TiledMapTileLayer)map.getLayers().get(0);
 
         //  Set player position
-        player = new Player("Player1", 2, 5, 2, 3,3, 67, hud);
+        player = new Player("Player1", 2, 5, 2, 3,3, 67, hud, game);
         TiledMapTileLayer.Cell cell = tileId.getCell(player.positionX, player.positionY);
         cell.setTile(map.getTileSets().getTile(player.idTile));
         player.setCell(cell);
 
         // Set ennemy position
-        ennemy = new Enemy("Ennemy1", 2, 8, 1, 13, 3, 199, hud);
+        ennemy = new Enemy("Ennemy1", 2, 8, 1, 13, 3, 199, hud, game);
         TiledMapTileLayer.Cell ennemyCell = tileId.getCell(ennemy.positionX, ennemy.positionY);
         ennemyCell.setTile(map.getTileSets().getTile(ennemy.idTile));
         ennemy.setCell(ennemyCell);

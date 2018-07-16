@@ -1,10 +1,12 @@
 package fr.imie.ena.fightforgrades.character;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
 
 import fr.imie.ena.fightforgrades.FightForGrades;
 import fr.imie.ena.fightforgrades.scenes.Hud;
+import fr.imie.ena.fightforgrades.screens.GameWinScreen;
 import fr.imie.ena.fightforgrades.tools.TiledMapActor;
 
 /**
@@ -17,8 +19,9 @@ public class Player extends Character {
     private boolean isMouvementCircle = false;
     private boolean enemyInRange = true;
     private Hud hud;
+    private Game game;
 
-    public Player(String name, int deplacements, int hp, int strenght, int positionX, int positionY, int idTile, Hud hud){
+    public Player(String name, int deplacements, int hp, int strenght, int positionX, int positionY, int idTile, Hud hud, Game game){
         this.name = name;
         this.deplacements = deplacements;
         this.positionX = positionX;
@@ -27,6 +30,7 @@ public class Player extends Character {
         this.hp = hp;
         this.strenght = strenght;
         this.hud = hud;
+        this.game = game;
 
         hud.updateHp(this.hp, true);
     }
@@ -75,7 +79,13 @@ public class Player extends Character {
             System.out.println("Enemy hp : " + enemy.hp);
 
             hud.updateHp(enemy.hp, false);
-            enemy.turn(tiledLayer, actor, this);
+
+            if(enemy.hp == 0){
+                game.setScreen(new GameWinScreen(game));
+            }else{
+                enemy.turn(tiledLayer, actor, this);
+            }
+
 
         }else{
             System.out.println("Cannot attack");
