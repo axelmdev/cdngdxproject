@@ -9,6 +9,9 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.ffg.DAL.DBHelper;
 import com.ffg.FFG;
 
+import fr.imie.ena.fightforgrades.FightForGrades;
+
+
 public class AndroidLauncher extends AndroidApplication {
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
@@ -16,23 +19,8 @@ public class AndroidLauncher extends AndroidApplication {
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		initialize(new FFG(), config);
 		DBHelper db = new DBHelper(this);
-		boolean insertResult = db.insertData("toto","tata","20");
-		Cursor res = db.getAllData();
-		int i = 1;
-		int qsd = res.getCount();
-		if (qsd == 0){
-			showMessage("Error","no Data");
-			return;
-		}
-		StringBuffer buffer = new StringBuffer();
-		while (res.moveToNext()){
-			buffer.append("Id : " + res.getString(0)+"\n");
-			buffer.append("Name : " + res.getString(1)+"\n");
-			buffer.append("Surname : " + res.getString(2)+"\n");
-			buffer.append("Marks : " + res.getString(3)+"\n\n");
-		}
-		System.out.println(buffer.toString());
-		showMessage("Data",buffer.toString());
+
+		initialize(new FightForGrades(), config);
 	}
 
 	public void showMessage(String title,String message){

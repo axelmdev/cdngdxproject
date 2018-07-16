@@ -55,7 +55,7 @@ public class AccountDAO implements BaseDAO<Account> {
     @Override
     public Account SelectOne(String id, DBHelper dbContext) {
         /*SQLiteDatabase db = dbContext.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM "+TABLE_NAME + " WHERE "+ COL_ID + " = ?",new String[]{});
+        Cursor res = db.rawQuery("SELECT * FROM "+TABLE_NAME + " WHERE "+ COL_ID + " =?",new String[]{});
         Account result = new Account();
         //Id
         result.setLiteID(res.getInt(0));

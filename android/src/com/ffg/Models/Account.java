@@ -10,6 +10,7 @@ public class Account {
     private String pseudo;
     private String mail;
     private String pwd;
+    private String accessToken;
     private Game game;
 
     public static String GetNameUrlVersion(){
