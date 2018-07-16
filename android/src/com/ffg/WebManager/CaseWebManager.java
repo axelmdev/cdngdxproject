@@ -8,6 +8,7 @@ import com.badlogic.gdx.net.HttpRequestBuilder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.ffg.DAL.CaseDAO;
+import com.ffg.DAL.DBHelper;
 import com.ffg.Models.Case;
 import com.ffg.Models.Map;
 import com.ffg.R;
@@ -23,6 +24,7 @@ public class CaseWebManager extends Activity {
     private String modelNameUrlVersion = Case.GetNameUrlVersion();
     private String mapNameUrlVersion = Map.GetNameUrlVersion();
     private String baseUrl = getString(R.string.apiBaseUrl);
+    private CaseWebManager caseWebManagerContext = this;
 
     public static Case GetOneFromJson(JsonValue jsonValue){
         Case newCase = new Case();
@@ -52,7 +54,7 @@ public class CaseWebManager extends Activity {
                 Json json = new Json();
                 JsonValue caseJson = json.fromJson(JsonValue.class,responseStringValue);
                 CaseDAO caseDAO = new CaseDAO();
-                caseDAO.Insert(GetOneFromJson(caseJson));
+                caseDAO.Insert(GetOneFromJson(caseJson), new DBHelper(caseWebManagerContext));
             }
 
             public void failed(Throwable t) {
@@ -83,7 +85,7 @@ public class CaseWebManager extends Activity {
                 Json json = new Json();
                 ArrayList<JsonValue> casesJson = json.fromJson(ArrayList.class,responseStringValue);
                 CaseDAO caseDAO = new CaseDAO();
-                caseDAO.InsertMany(GetManyFromJson(casesJson));
+                caseDAO.InsertMany(GetManyFromJson(casesJson), new DBHelper(caseWebManagerContext));
             }
 
             public void failed(Throwable t) {

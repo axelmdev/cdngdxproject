@@ -7,6 +7,7 @@ import com.badlogic.gdx.Net;
 import com.badlogic.gdx.net.HttpRequestBuilder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.ffg.DAL.DBHelper;
 import com.ffg.DAL.SkillDAO;
 import com.ffg.Models.ActiveCharacter;
 import com.ffg.Models.Skill;
@@ -23,6 +24,7 @@ public class SkillWebManager extends Activity {
     private String modelNameUrlVersion = Skill.GetNameUrlVersion();
     private String activeCharacterNameUrlVersion = ActiveCharacter.GetNameUrlVersion();
     private String baseUrl = getString(R.string.apiBaseUrl);
+    private SkillWebManager skillWebManagerContext = this;
 
     public static Skill GetOneFromJson(JsonValue jsonValue){
         Skill skill = new Skill();
@@ -51,7 +53,7 @@ public class SkillWebManager extends Activity {
                 Json json = new Json();
                 JsonValue skillJson = json.fromJson(JsonValue.class,responseStringValue);
                 SkillDAO skillDAO = new SkillDAO();
-                skillDAO.Insert(GetOneFromJson(skillJson));
+                skillDAO.Insert(GetOneFromJson(skillJson), new DBHelper(skillWebManagerContext));
             }
 
             public void failed(Throwable t) {
@@ -81,7 +83,7 @@ public class SkillWebManager extends Activity {
                 Json json = new Json();
                 ArrayList<JsonValue> skillsJson = json.fromJson(ArrayList.class,responseStringValue);
                 SkillDAO skillDAO = new SkillDAO();
-                skillDAO.InsertMany(GetManyFromJson(skillsJson));
+                skillDAO.InsertMany(GetManyFromJson(skillsJson), new DBHelper(skillWebManagerContext));
             }
 
             public void failed(Throwable t) {

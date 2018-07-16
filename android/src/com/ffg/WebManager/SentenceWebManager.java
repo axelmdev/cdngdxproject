@@ -7,6 +7,7 @@ import com.badlogic.gdx.Net;
 import com.badlogic.gdx.net.HttpRequestBuilder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.ffg.DAL.DBHelper;
 import com.ffg.DAL.SentenceDAO;
 import com.ffg.Models.Character;
 import com.ffg.Models.Sentence;
@@ -23,6 +24,7 @@ public class SentenceWebManager extends Activity {
     private String modelNameUrlVersion = Sentence.GetNameUrlVersion();
     private String characterNameUrlVersion = Character.GetNameUrlVersion();
     private String baseUrl = getString(R.string.apiBaseUrl);
+    private SentenceWebManager sentenceWebManagerContext = this;
 
     public static Sentence GetOneFromJson(JsonValue jsonValue){
             Sentence sentence = new Sentence();
@@ -51,7 +53,7 @@ public class SentenceWebManager extends Activity {
                 Json json = new Json();
                 JsonValue sentenceJson = json.fromJson(JsonValue.class,responseStringValue);
                 SentenceDAO sentenceDAO = new SentenceDAO();
-                sentenceDAO.Insert(GetOneFromJson(sentenceJson));
+                sentenceDAO.Insert(GetOneFromJson(sentenceJson), new DBHelper(sentenceWebManagerContext));
             }
 
             public void failed(Throwable t) {
@@ -83,7 +85,7 @@ public class SentenceWebManager extends Activity {
                 Json json = new Json();
                 ArrayList<JsonValue> sentencesJson = json.fromJson(ArrayList.class,responseStringValue);
                 SentenceDAO sentenceDAO = new SentenceDAO();
-                sentenceDAO.InsertMany(GetManyFromJson(sentencesJson));
+                sentenceDAO.InsertMany(GetManyFromJson(sentencesJson), new DBHelper(sentenceWebManagerContext));
             }
 
             public void failed(Throwable t) {

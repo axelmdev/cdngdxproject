@@ -7,6 +7,7 @@ import com.badlogic.gdx.Net;
 import com.badlogic.gdx.net.HttpRequestBuilder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.ffg.DAL.DBHelper;
 import com.ffg.DAL.MapDAO;
 import com.ffg.Models.Game;
 import com.ffg.Models.Map;
@@ -23,6 +24,7 @@ public class MapWebManager extends Activity {
     private String modelNameUrlVersion = Map.GetNameUrlVersion();
     private String gameNameUrlVersion = Game.GetNameUrlVersion();
     private String baseUrl = getString(R.string.apiBaseUrl);
+    private MapWebManager mapWebManagerContext = this;
 
     public static Map GetOneFromJson(JsonValue jsonValue){
         Map map = new Map();
@@ -53,7 +55,7 @@ public class MapWebManager extends Activity {
                 Json json = new Json();
                 JsonValue mapJson = json.fromJson(JsonValue.class,responseStringValue);
                 MapDAO mapDAO = new MapDAO();
-                mapDAO.Insert(GetOneFromJson(mapJson));
+                mapDAO.Insert(GetOneFromJson(mapJson), new DBHelper(mapWebManagerContext));
             }
 
             public void failed(Throwable t) {
@@ -84,7 +86,7 @@ public class MapWebManager extends Activity {
                 Json json = new Json();
                 ArrayList<JsonValue> mapsJson = json.fromJson(ArrayList.class,responseStringValue);
                 MapDAO mapDAO = new MapDAO();
-                mapDAO.InsertMany(GetManyFromJson(mapsJson));
+                mapDAO.InsertMany(GetManyFromJson(mapsJson), new DBHelper(mapWebManagerContext));
             }
 
             public void failed(Throwable t) {

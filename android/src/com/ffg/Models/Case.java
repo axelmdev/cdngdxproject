@@ -5,10 +5,12 @@ package com.ffg.Models;
  */
 
 public class Case {
-    private int liteID;
-    private String mapLiteID;
+    private Integer liteID;
+    private Integer mapLiteID;
+    private Integer charLiteID;
     private String mongoID;
     private String mapMongoID;
+    private String charMongoID;
     private boolean usable;
     private String img;
 
@@ -16,20 +18,28 @@ public class Case {
         return "Cases";
     }
 
-    public int getLiteID() {
+    public Integer getLiteID() {
         return liteID;
     }
 
-    public void setLiteID(int liteID) {
+    public void setLiteID(Integer liteID) {
         this.liteID = liteID;
     }
 
-    public String getMapLiteID() {
+    public Integer getMapLiteID() {
         return mapLiteID;
     }
 
-    public void setMapLiteID(String mapLiteID) {
+    public void setMapLiteID(Integer mapLiteID) {
         this.mapLiteID = mapLiteID;
+    }
+
+    public Integer getCharLiteID() {
+        return charLiteID;
+    }
+
+    public void setCharLiteID(Integer charLiteID) {
+        this.charLiteID = charLiteID;
     }
 
     public String getMongoID() {
@@ -48,7 +58,15 @@ public class Case {
         this.mapMongoID = mapMongoID;
     }
 
-    public boolean isUsable() {
+    public String getCharMongoID() {
+        return charMongoID;
+    }
+
+    public void setCharMongoID(String charMongoID) {
+        this.charMongoID = charMongoID;
+    }
+
+    public boolean getUsable() {
         return usable;
     }
 

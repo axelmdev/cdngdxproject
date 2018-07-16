@@ -10,30 +10,32 @@ import java.util.ArrayList;
 
 public class Character {
 
-    private int liteID;
-    private String gameLiteID;
+    private Integer liteID;
+    private Integer gameLiteID;
     private String mongoID;
     private String gameMongoID;
     private String name;
+    private Integer id_case;
+    private String mongoID_case;
     private ArrayList<Sentence> sentenceList;
 
     public static String GetNameUrlVersion(){
         return "Characters";
     }
 
-    public int getLiteID() {
+    public Integer getLiteID() {
         return liteID;
     }
 
-    public void setLiteID(int liteID) {
+    public void setLiteID(Integer liteID) {
         this.liteID = liteID;
     }
 
-    public String getGameLiteID() {
+    public Integer getGameLiteID() {
         return gameLiteID;
     }
 
-    public void setGameLiteID(String gameLiteID) {
+    public void setGameLiteID(Integer gameLiteID) {
         this.gameLiteID = gameLiteID;
     }
 
@@ -59,6 +61,22 @@ public class Character {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getId_case() {
+        return id_case;
+    }
+
+    public void setId_case(Integer id_case) {
+        this.id_case = id_case;
+    }
+
+    public String getMongoID_case() {
+        return mongoID_case;
+    }
+
+    public void setMongoID_case(String mongoID_case) {
+        this.mongoID_case = mongoID_case;
     }
 
     public ArrayList<Sentence> getSentenceList() {

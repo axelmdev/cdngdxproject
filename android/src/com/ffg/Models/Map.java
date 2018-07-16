@@ -7,8 +7,8 @@ import java.util.ArrayList;
  */
 
 public class Map {
-    private int liteID;
-    private String gameLiteID;
+    private Integer liteID;
+    private Integer gameLiteID;
     private String mongoID;
     private String gameMongoID;
     private String name;
@@ -18,19 +18,19 @@ public class Map {
         return "Maps";
     }
 
-    public int getLiteID() {
+    public Integer getLiteID() {
         return liteID;
     }
 
-    public void setLiteID(int liteID) {
+    public void setLiteID(Integer liteID) {
         this.liteID = liteID;
     }
 
-    public String getGameLiteID() {
+    public Integer getGameLiteID() {
         return gameLiteID;
     }
 
-    public void setGameLiteID(String gameLiteID) {
+    public void setGameLiteID(Integer gameLiteID) {
         this.gameLiteID = gameLiteID;
     }
 

@@ -5,22 +5,22 @@ package com.ffg.Models;
  */
 
 public class Skill {
-    private int liteID;
+    private Integer liteID;
     private String activeCharacterLiteID;
     private String mongoID;
     private String activeCharacterMongoID;
     private String name;
-    private int damage;
+    private Integer damage;
 
     public static String GetNameUrlVersion(){
         return "Skills";
     }
 
-    public int getLiteID() {
+    public Integer getLiteID() {
         return liteID;
     }
 
-    public void setLiteID(int liteID) {
+    public void setLiteID(Integer liteID) {
         this.liteID = liteID;
     }
 
@@ -56,11 +56,11 @@ public class Skill {
         this.name = name;
     }
 
-    public int getDamage() {
+    public Integer getDamage() {
         return damage;
     }
 
-    public void setDamage(int damage) {
+    public void setDamage(Integer damage) {
         this.damage = damage;
     }
 }

@@ -5,7 +5,7 @@ package com.ffg.Models;
  */
 
 public class Sentence {
-    private int liteID;
+    private Integer liteID;
     private String characterLiteID;
     private String mongoID;
     private String characterMongoID;
@@ -15,11 +15,11 @@ public class Sentence {
         return "Sentences";
     }
 
-    public int getLiteID() {
+    public Integer getLiteID() {
         return liteID;
     }
 
-    public void setLiteID(int liteID) {
+    public void setLiteID(Integer liteID) {
         this.liteID = liteID;
     }
 

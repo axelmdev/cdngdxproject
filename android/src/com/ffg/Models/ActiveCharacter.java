@@ -7,36 +7,39 @@ import java.util.ArrayList;
  */
 
 public class ActiveCharacter extends Character {
-    private int liteID;
-    private String gameLiteID;
+    private Integer liteID;
+    private Integer gameLiteID;
     private String gameMongoID;
-    private int level;
-    private int statsLife;
-    private int statsAttack;
-    private int statsDefense;
-    private int currentLife;
-    private int currentAttack;
-    private int currentDefense;
-    private int experience;
+    private Integer charLiteID;
+    private String charMongoID;
+    private Integer caseLiteID;
+    private Integer level;
+    private Integer statsLife;
+    private Integer statsAttack;
+    private Integer statsDefense;
+    private Integer currentLife;
+    private Integer currentAttack;
+    private Integer currentDefense;
+    private Integer experience;
     private ArrayList<Skill> skillList;
 
     public static String GetNameUrlVersion(){
         return "ActiveCharacters";
     }
 
-    public int getLiteID() {
+    public Integer getLiteID() {
         return liteID;
     }
 
-    public void setLiteID(int liteID) {
+    public void setLiteID(Integer liteID) {
         this.liteID = liteID;
     }
 
-    public String getGameLiteID() {
+    public Integer getGameLiteID() {
         return gameLiteID;
     }
 
-    public void setGameLiteID(String gameLiteID) {
+    public void setGameLiteID(Integer gameLiteID) {
         this.gameLiteID = gameLiteID;
     }
 
@@ -50,67 +53,67 @@ public class ActiveCharacter extends Character {
         this.gameMongoID = gameMongoID;
     }
 
-    public int getLevel() {
+    public Integer getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(Integer level) {
         this.level = level;
     }
 
-    public int getStatsLife() {
+    public Integer getStatsLife() {
         return statsLife;
     }
 
-    public void setStatsLife(int statsLife) {
+    public void setStatsLife(Integer statsLife) {
         this.statsLife = statsLife;
     }
 
-    public int getStatsAttack() {
+    public Integer getStatsAttack() {
         return statsAttack;
     }
 
-    public void setStatsAttack(int statsAttack) {
+    public void setStatsAttack(Integer statsAttack) {
         this.statsAttack = statsAttack;
     }
 
-    public int getStatsDefense() {
+    public Integer getStatsDefense() {
         return statsDefense;
     }
 
-    public void setStatsDefense(int statsDefense) {
+    public void setStatsDefense(Integer statsDefense) {
         this.statsDefense = statsDefense;
     }
 
-    public int getCurrentLife() {
+    public Integer getCurrentLife() {
         return currentLife;
     }
 
-    public void setCurrentLife(int currentLife) {
+    public void setCurrentLife(Integer currentLife) {
         this.currentLife = currentLife;
     }
 
-    public int getCurrentAttack() {
+    public Integer getCurrentAttack() {
         return currentAttack;
     }
 
-    public void setCurrentAttack(int currentAttack) {
+    public void setCurrentAttack(Integer currentAttack) {
         this.currentAttack = currentAttack;
     }
 
-    public int getCurrentDefense() {
+    public Integer getCurrentDefense() {
         return currentDefense;
     }
 
-    public void setCurrentDefense(int currentDefense) {
+    public void setCurrentDefense(Integer currentDefense) {
         this.currentDefense = currentDefense;
     }
 
-    public int getExperience() {
+    public Integer getExperience() {
         return experience;
     }
 
-    public void setExperience(int experience) {
+    public void setExperience(Integer experience) {
         this.experience = experience;
     }
 
@@ -120,5 +123,29 @@ public class ActiveCharacter extends Character {
 
     public void setSkillList(ArrayList<Skill> skillList) {
         this.skillList = skillList;
+    }
+
+    public Integer getCharLiteID() {
+        return charLiteID;
+    }
+
+    public void setCharLiteID(Integer charLiteID) {
+        this.charLiteID = charLiteID;
+    }
+
+    public String getCharMongoID() {
+        return charMongoID;
+    }
+
+    public void setCharMongoID(String charMongoID) {
+        this.charMongoID = charMongoID;
+    }
+
+    public Integer getCaseLiteID() {
+        return caseLiteID;
+    }
+
+    public void setCaseLiteID(Integer caseLiteID) {
+        this.caseLiteID = caseLiteID;
     }
 }

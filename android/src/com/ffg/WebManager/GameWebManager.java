@@ -25,6 +25,7 @@ public class GameWebManager extends Activity {
     private String modelNameUrlVersion = Game.GetNameUrlVersion();
     private String accountNameUrlVersion = Account.GetNameUrlVersion();
     private String baseUrl = getString(R.string.apiBaseUrl);
+    private GameWebManager gameWebManagerContext = this;
 
     public static Game GetOneFromJson(JsonValue jsonValue){
         Game game = new Game();

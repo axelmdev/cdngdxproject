@@ -8,6 +8,7 @@ import com.badlogic.gdx.net.HttpRequestBuilder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.ffg.DAL.AccountDAO;
+import com.ffg.DAL.DBHelper;
 import com.ffg.Models.Account;
 import com.ffg.R;
 
@@ -21,7 +22,7 @@ public class AccountWebManager extends Activity {
 
     private String modelNameUrlVersion = Account.GetNameUrlVersion();
     private String baseUrl = getString(R.string.apiBaseUrl);
-
+    private AccountWebManager accountWebManagerContext = this;
 
     public Account GetOne(String id) {
 
@@ -37,11 +38,9 @@ public class AccountWebManager extends Activity {
                 newAccount.setMail(accountJson.getString("mail"));
                 newAccount.setPwd(accountJson.getString("pwd"));
 
-
-
-                //newAccount.setGame(accountJson.getString("pseudo"));
                 AccountDAO accountDAO = new AccountDAO();
-                accountDAO.Insert(newAccount);
+                DBHelper dbHelper = new DBHelper(accountWebManagerContext);
+                accountDAO.Insert(newAccount,dbHelper);
             }
 
             public void failed(Throwable t) {
@@ -82,7 +81,8 @@ public class AccountWebManager extends Activity {
                     accounts.add(newAccount);
                 }
                 AccountDAO accountDAO = new AccountDAO();
-                accountDAO.InsertMany(accounts);
+                DBHelper dbHelper = new DBHelper(accountWebManagerContext);
+                accountDAO.InsertMany(accounts,dbHelper);
             }
 
             public void failed(Throwable t) {

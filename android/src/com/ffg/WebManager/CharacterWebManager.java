@@ -8,6 +8,7 @@ import com.badlogic.gdx.net.HttpRequestBuilder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.ffg.DAL.CharacterDAO;
+import com.ffg.DAL.DBHelper;
 import com.ffg.DAL.SentenceDAO;
 import com.ffg.Models.Character;
 import com.ffg.Models.Game;
@@ -25,6 +26,7 @@ public class CharacterWebManager extends Activity {
     private String modelNameUrlVersion = Character.GetNameUrlVersion();
     private String gameNameUrlVersion = Game.GetNameUrlVersion();
     private String baseUrl = getString(R.string.apiBaseUrl);
+    private CharacterWebManager characterWebManagerContext = this;
 
     public static Character GetOneFromJson(JsonValue jsonValue){
         Character newCharacter = new Character();
@@ -57,7 +59,7 @@ public class CharacterWebManager extends Activity {
                 Json json = new Json();
                 JsonValue characterJson = json.fromJson(JsonValue.class,responseStringValue);
                 CharacterDAO characterDAO = new CharacterDAO();
-                characterDAO.Insert(GetOneFromJson(characterJson));
+                characterDAO.Insert(GetOneFromJson(characterJson), new DBHelper(characterWebManagerContext));
             }
 
             public void failed(Throwable t) {
@@ -89,7 +91,7 @@ public class CharacterWebManager extends Activity {
                 Json json = new Json();
                 ArrayList<JsonValue> charactersJson = json.fromJson(ArrayList.class,responseStringValue);
                 CharacterDAO characterDAO = new CharacterDAO();
-                characterDAO.InsertMany(GetManyFromJson(charactersJson));
+                characterDAO.InsertMany(GetManyFromJson(charactersJson), new DBHelper(characterWebManagerContext));
             }
 
             public void failed(Throwable t) {
