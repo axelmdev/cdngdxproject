@@ -86,6 +86,8 @@ public class Player extends Character {
                 enemy.turn(tiledLayer, actor, this);
             }
 
+            // Remove mouvement circle
+            this.toggleMouvement(tiledLayer, 4, actor);
 
         }else{
             System.out.println("Cannot attack");
