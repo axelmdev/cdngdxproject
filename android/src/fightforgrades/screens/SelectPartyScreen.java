@@ -42,7 +42,7 @@ public class SelectPartyScreen implements Screen {
         party1Btn.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen((FightForGrades) game, button));
+                game.setScreen(new PlayScreen((FightForGrades) game, 0));
                 return true;
             }
 
@@ -58,7 +58,7 @@ public class SelectPartyScreen implements Screen {
         party2Btn.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen((FightForGrades) game, button));
+                game.setScreen(new PlayScreen((FightForGrades) game, 1));
                 return true;
             }
 
@@ -74,7 +74,7 @@ public class SelectPartyScreen implements Screen {
         party3Btn.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen((FightForGrades) game, button));
+                game.setScreen(new PlayScreen((FightForGrades) game, 2));
                 return true;
             }
 

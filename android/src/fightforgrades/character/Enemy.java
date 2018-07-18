@@ -25,7 +25,7 @@ public class Enemy extends Character {
         this.idTile = idTile;
         this.hp = hp;
         this.strenght = strenght;
-        this.defense = 0;
+        this.defense = defense;
         this.hud = hud;
         this.game = game;
 

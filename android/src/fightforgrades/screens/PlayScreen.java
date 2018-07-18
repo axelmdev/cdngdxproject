@@ -55,22 +55,20 @@ public class PlayScreen implements Screen {
 
         TiledMapTileLayer tileId = (TiledMapTileLayer)map.getLayers().get(0);
 
-        System.out.println("buttonid : "+buttonId);
-
         switch(buttonId){
             case 0:
-                player = new Player("Edge", 2, 6, 6, 67, 10, 2, 1, hud, game);
-                ennemy = new Enemy("Formateur", 2, 12, 6, 199, 5, 2, 1, hud, game);
+                player = new Player("Edge", 2, 3, 3, 67, 10, 2, 1, hud, game);
+                ennemy = new Enemy("Formateur", 2, 12, 3, 199, 5, 2, 1, hud, game);
                 break;
 
             case 1:
-                player = new Player("Edge", 2, 6, 6, 67, 10, 2, 1, hud, game);
-                ennemy = new Enemy("Formateur", 2, 12, 6, 199, 5, 2, 1, hud, game);
+                player = new Player("Edrenn", 3, 0, 7, 67, 10, 5, 3, hud, game);
+                ennemy = new Enemy("Formateur", 2, 15, 0, 199, 10, 5, 2, hud, game);
                 break;
 
             case 2:
-                player = new Player("Edge", 2, 6, 6, 67, 10, 2, 1, hud, game);
-                ennemy = new Enemy("Formateur", 2, 12, 6, 199, 5, 2, 1, hud, game);
+                player = new Player("Axel", 2, 6, 3, 67, 20, 7, 5, hud, game);
+                ennemy = new Enemy("Jury", 2, 12, 3, 199, 25, 10, 3, hud, game);
                 break;
         }
         //  Set player position
