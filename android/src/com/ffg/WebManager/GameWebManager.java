@@ -54,7 +54,7 @@ public class GameWebManager extends Activity {
     }
 
 
-    public Game GetOne(String gameID, String id) {
+    public Game GetOne(String accID) {
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 String responseStringValue = httpResponse.getResultAsString();
@@ -79,7 +79,7 @@ public class GameWebManager extends Activity {
         };
 
         HttpRequestBuilder requestBuilder = new HttpRequestBuilder();
-        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url(baseUrl + accountNameUrlVersion + "/" + gameID + "/" + modelNameUrlVersion + "/" + id).build();
+        Net.HttpRequest httpRequest = requestBuilder.newRequest().method(Net.HttpMethods.GET).url(baseUrl + accountNameUrlVersion + "/" + accID + "/" + modelNameUrlVersion + "/").build();
         Gdx.net.sendHttpRequest(httpRequest, hrl);
         return null;
     }

@@ -24,6 +24,26 @@ public class AccountWebManager extends Activity {
     private String baseUrl = getString(R.string.apiBaseUrl);
     private AccountWebManager accountWebManagerContext = this;
 
+    public static Account GetOneFromJson(JsonValue accountJson){
+        Account newAccount = new Account();
+        newAccount.setMongoID(accountJson.getString("id"));
+        newAccount.setPseudo(accountJson.getString("pseudo"));
+        newAccount.setMail(accountJson.getString("mail"));
+        newAccount.setPwd(accountJson.getString("pwd"));
+
+        GameWebManager gameWebManager = new GameWebManager();
+        newAccount.setGame(gameWebManager.GetOne(newAccount.getMongoID()));
+        return newAccount;
+    }
+
+    public static ArrayList<Account> GetManyFromJson(ArrayList<JsonValue> jsonValue){
+        ArrayList<Account> allAccount = new ArrayList<>();
+        for (JsonValue accountJson : jsonValue) {
+            allAccount.add(GetOneFromJson(accountJson));
+        }
+        return allAccount;
+    }
+
     public Account GetOne(String id) {
 
         Net.HttpResponseListener hrl = new Net.HttpResponseListener() {
