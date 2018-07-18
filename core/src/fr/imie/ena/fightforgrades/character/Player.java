@@ -29,6 +29,7 @@ public class Player extends Character {
         this.idTile = idTile;
         this.hp = hp;
         this.strenght = strenght;
+        this.defense = 0;
         this.hud = hud;
         this.game = game;
 
@@ -70,9 +71,14 @@ public class Player extends Character {
     }
 
     public void attack(TiledMapTileLayer tiledLayer, TiledMapActor actor, Enemy enemy){
+        int attack = 1; // default attack = 1
+        if(enemy.defense < this.strenght){
+            attack = this.strenght - enemy.defense;
+        }
+
         if(this.enemyInRange){
-            if(enemy.hp >= this.strenght)
-                enemy.hp = enemy.hp - this.strenght;
+            if(enemy.hp >= attack)
+                enemy.hp = enemy.hp - attack;
             else
                 enemy.hp = 0;
 

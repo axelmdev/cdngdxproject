@@ -25,6 +25,7 @@ public class Enemy extends Character {
         this.idTile = idTile;
         this.hp = hp;
         this.strenght = strenght;
+        this.defense = 0;
         this.hud = hud;
         this.game = game;
 
@@ -91,10 +92,18 @@ public class Enemy extends Character {
 
     public void attack(Player player){
         System.out.println("Enemy attack !");
-        if(player.hp >= this.strenght)
-            player.hp = player.hp - this.strenght;
-        else
+        int attack = 1; // default attack = 1
+        // if strenght > defense change attack
+        if(player.defense < this.strenght){
+            attack = this.strenght - player.defense;
+        }
+
+        if(player.hp >= attack){
+            player.hp = player.hp - attack;
+        }else{
             player.hp = 0;
+        }
+
 
         hud.updateHp(player.hp, true);
         System.out.println("HP : " + player.hp);

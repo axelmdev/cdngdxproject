@@ -19,5 +19,6 @@ public abstract class Character {
     public int positionY;
     public int hp;
     public int strenght;
+    public int defense;
 
 }
