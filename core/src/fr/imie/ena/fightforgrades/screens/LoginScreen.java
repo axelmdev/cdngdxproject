@@ -51,7 +51,7 @@ public class LoginScreen implements Screen {
         passwordField.setPasswordMode(true);
         passwordField.setPasswordCharacter('*');
 
-        Button startBtn = new TextButton("Connexion",mySkin,"small");
+        Button startBtn = new TextButton("Connexion",mySkin,"default");
         startBtn.setSize(GameConstants.col_width*2,GameConstants.row_height);
         startBtn.setPosition(GameConstants.centerX - startBtn.getWidth()/2,passwordField.getY() - GameConstants.row_height -15);
         startBtn.addListener(new InputListener(){

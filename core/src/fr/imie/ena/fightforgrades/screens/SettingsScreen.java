@@ -38,8 +38,8 @@ public class SettingsScreen implements Screen {
         gameTitle.setPosition(GameConstants.centerX - gameTitle.getWidth()/2,GameConstants.centerY + GameConstants.row_height);
         gameTitle.setAlignment(Align.center);
 
-        Button homeBtn = new TextButton("Return Home",mySkin,"small");
-        homeBtn.setSize(GameConstants.col_width,GameConstants.row_height*2);
+        Button homeBtn = new TextButton("Return Home",mySkin,"default");
+        homeBtn.setSize(GameConstants.col_width*2,GameConstants.row_height);
         homeBtn.setPosition(GameConstants.centerX - homeBtn.getWidth()/2,GameConstants.centerY);
         homeBtn.addListener(new InputListener(){
 

@@ -34,7 +34,7 @@ public class MainMenuScreen implements Screen {
         gameTitle.setPosition(GameConstants.centerX - gameTitle.getWidth()/2,GameConstants.centerY + GameConstants.row_height);
         gameTitle.setAlignment(Align.center);
 
-        Button startBtn = new TextButton("Start Game",mySkin,"small");
+        Button startBtn = new TextButton("Start Game",mySkin,"default");
         startBtn.setSize(GameConstants.col_width*2,GameConstants.row_height);
         startBtn.setPosition(GameConstants.centerX - startBtn.getWidth()/2,GameConstants.centerY);
         startBtn.addListener(new InputListener(){
@@ -50,7 +50,7 @@ public class MainMenuScreen implements Screen {
             }
         });
 
-        Button settingsBtn = new TextButton("Settings",mySkin,"small");
+        Button settingsBtn = new TextButton("Settings",mySkin,"default");
         settingsBtn.setSize(GameConstants.col_width*2,GameConstants.row_height);
         settingsBtn.setPosition(GameConstants.centerX - settingsBtn.getWidth()/2,startBtn.getY() - GameConstants.row_height -15);
         settingsBtn.addListener(new InputListener(){
