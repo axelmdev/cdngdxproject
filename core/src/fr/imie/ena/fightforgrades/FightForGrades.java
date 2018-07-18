@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
-import fr.imie.ena.fightforgrades.screens.MainMenuScreen;
+import fr.imie.ena.fightforgrades.screens.LoginScreen;
 
 public class FightForGrades extends Game {
 
@@ -26,7 +26,7 @@ public class FightForGrades extends Game {
         camera.setToOrtho(false);
         screenPort = new ScreenViewport();
 
-        this.setScreen(new MainMenuScreen(this));
+        this.setScreen(new LoginScreen(this));
     }
 
     @Override
@@ -37,9 +37,5 @@ public class FightForGrades extends Game {
     @Override
     public void dispose () {
         batch.dispose();
-    }
-    public void gotoMenuScreen(){
-        MainMenuScreen mainMenuScreen = new MainMenuScreen(this);
-        setScreen(mainMenuScreen);
     }
 }

@@ -25,24 +25,22 @@ public class MainMenuScreen implements Screen {
         game.myAssetManager.queueAddSkin();
         game.myAssetManager.manager.finishLoading();
         mySkin = game.myAssetManager.manager.get(GameConstants.skin);
-        /*badlogic = new Texture(Gdx.files.internal("badlogic.jpg"));*/
-        /*mySkin = new Skin(Gdx.files.internal(GameConstants.skin));*/
         stage = new Stage(game.screenPort);
         Gdx.input.setInputProcessor(stage);
 
 
-        Label gameTitle = new Label("GAME MENU",mySkin,"big");
+        Label gameTitle = new Label("FIGHT FOR GRADES",mySkin,"big");
         gameTitle.setSize(GameConstants.col_width*2,GameConstants.row_height*2);
         gameTitle.setPosition(GameConstants.centerX - gameTitle.getWidth()/2,GameConstants.centerY + GameConstants.row_height);
         gameTitle.setAlignment(Align.center);
 
-        Button startBtn = new TextButton("START GAME",mySkin,"small");
+        Button startBtn = new TextButton("Start Game",mySkin,"default");
         startBtn.setSize(GameConstants.col_width*2,GameConstants.row_height);
         startBtn.setPosition(GameConstants.centerX - startBtn.getWidth()/2,GameConstants.centerY);
         startBtn.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen((FightForGrades) game));
+                game.setScreen(new SelectPartyScreen((FightForGrades) game));
                 return true;
             }
 
@@ -52,13 +50,13 @@ public class MainMenuScreen implements Screen {
             }
         });
 
-        Button settingsBtn = new TextButton("SETTINGS",mySkin,"small");
+        Button settingsBtn = new TextButton("Settings",mySkin,"default");
         settingsBtn.setSize(GameConstants.col_width*2,GameConstants.row_height);
         settingsBtn.setPosition(GameConstants.centerX - settingsBtn.getWidth()/2,startBtn.getY() - GameConstants.row_height -15);
         settingsBtn.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                
+                game.setScreen(new SettingsScreen((FightForGrades) game));
                 return true;
             }
 
@@ -100,6 +98,8 @@ public class MainMenuScreen implements Screen {
     public void pause() {
 
     }
+
+
 
     @Override
     public void resume() {

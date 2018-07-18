@@ -38,7 +38,7 @@ public class GameWinScreen implements Screen {
         table.setFillParent(true);
 
         Label gameOverLabel = new Label("WIN", font);
-        Label playAgainLabel = new Label("Click to Play Again", font);
+        Label playAgainLabel = new Label("Return to menu", font);
         table.add(gameOverLabel).expandX();
         table.row();
         table.add(playAgainLabel).expandX().padTop(10f);
@@ -55,7 +55,7 @@ public class GameWinScreen implements Screen {
     @Override
     public void render(float delta) {
         if(Gdx.input.justTouched()){
-            game.setScreen(new PlayScreen((FightForGrades) game));
+            game.setScreen(new MainMenuScreen((FightForGrades) game));
             dispose();
         }
 

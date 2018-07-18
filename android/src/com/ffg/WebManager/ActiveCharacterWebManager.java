@@ -42,11 +42,11 @@ public class ActiveCharacterWebManager extends Activity {
     }
 
     public static ArrayList<ActiveCharacter> GetManyFromJson(ArrayList<JsonValue> jsonValue){
-        ArrayList<ActiveCharacter> allCase = new ArrayList<>();
-        for (JsonValue characterJson : jsonValue) {
-            allCase.add(GetOneFromJson(characterJson));
+        ArrayList<ActiveCharacter> allAC = new ArrayList<>();
+        for (JsonValue aCJson : jsonValue) {
+            allAC.add(GetOneFromJson(aCJson));
         }
-        return allCase;
+        return allAC;
     }
 
 
