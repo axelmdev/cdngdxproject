@@ -35,17 +35,21 @@ public class LoginScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         Label gameTitle = new Label("FIGHT FOR GRADES",mySkin,"big");
-        gameTitle.setSize(GameConstants.col_width*2,GameConstants.row_height*2);
+        gameTitle.setSize(GameConstants.col_width,GameConstants.row_height*2);
         gameTitle.setPosition(GameConstants.centerX - gameTitle.getWidth()/2,GameConstants.centerY + GameConstants.row_height);
         gameTitle.setAlignment(Align.center);
 
         final TextField usernameTextField = new TextField("", mySkin, "default");
-        usernameTextField.setPosition(GameConstants.centerX - usernameTextField.getWidth()/2,GameConstants.centerY);
+        usernameTextField.setPosition(GameConstants.centerX - usernameTextField.getWidth(),GameConstants.centerY);
         usernameTextField.setSize(GameConstants.col_width*2,GameConstants.row_height);
+        usernameTextField.setAlignment(Align.center);
 
         final TextField passwordField = new TextField("", mySkin, "default");
-        passwordField.setPosition(GameConstants.centerX - passwordField.getWidth()/2,usernameTextField.getY() - GameConstants.row_height -15);
+        passwordField.setPosition(GameConstants.centerX - passwordField.getWidth(),usernameTextField.getY() - GameConstants.row_height -15);
         passwordField.setSize(GameConstants.col_width*2,GameConstants.row_height);
+        passwordField.setAlignment(Align.center);
+        passwordField.setPasswordMode(true);
+        passwordField.setPasswordCharacter('*');
 
         Button startBtn = new TextButton("Connexion",mySkin,"small");
         startBtn.setSize(GameConstants.col_width*2,GameConstants.row_height);
@@ -62,7 +66,7 @@ public class LoginScreen implements Screen {
                 super.touchUp(event, x, y, pointer, button);
             }
         });
-
+        stage.addActor(gameTitle);
         stage.addActor(usernameTextField);
         stage.addActor(passwordField);
         stage.addActor(startBtn);
