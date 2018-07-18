@@ -1,4 +1,4 @@
-package fr.imie.ena.fightforgrades.screens;
+package fightforgrades.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -13,8 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Align;
 
-import fr.imie.ena.fightforgrades.FightForGrades;
-import fr.imie.ena.fightforgrades.GameConstants;
+import fightforgrades.FightForGrades;
+import fightforgrades.GameConstants;
 
 /**
  * Created by Axel on 17/06/2018.
@@ -35,24 +35,24 @@ public class LoginScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         Label gameTitle = new Label("FIGHT FOR GRADES",mySkin,"big");
-        gameTitle.setSize(GameConstants.col_width,GameConstants.row_height*2);
-        gameTitle.setPosition(GameConstants.centerX - gameTitle.getWidth()/2,GameConstants.centerY + GameConstants.row_height);
+        gameTitle.setSize(GameConstants.col_width, GameConstants.row_height*2);
+        gameTitle.setPosition(GameConstants.centerX - gameTitle.getWidth()/2, GameConstants.centerY + GameConstants.row_height);
         gameTitle.setAlignment(Align.center);
 
         final TextField usernameTextField = new TextField("", mySkin, "default");
-        usernameTextField.setPosition(GameConstants.centerX - usernameTextField.getWidth(),GameConstants.centerY);
-        usernameTextField.setSize(GameConstants.col_width*2,GameConstants.row_height);
+        usernameTextField.setPosition(GameConstants.centerX - usernameTextField.getWidth(), GameConstants.centerY);
+        usernameTextField.setSize(GameConstants.col_width*2, GameConstants.row_height);
         usernameTextField.setAlignment(Align.center);
 
         final TextField passwordField = new TextField("", mySkin, "default");
         passwordField.setPosition(GameConstants.centerX - passwordField.getWidth(),usernameTextField.getY() - GameConstants.row_height -15);
-        passwordField.setSize(GameConstants.col_width*2,GameConstants.row_height);
+        passwordField.setSize(GameConstants.col_width*2, GameConstants.row_height);
         passwordField.setAlignment(Align.center);
         passwordField.setPasswordMode(true);
         passwordField.setPasswordCharacter('*');
 
         Button startBtn = new TextButton("Connexion",mySkin,"default");
-        startBtn.setSize(GameConstants.col_width*2,GameConstants.row_height);
+        startBtn.setSize(GameConstants.col_width*2, GameConstants.row_height);
         startBtn.setPosition(GameConstants.centerX - startBtn.getWidth()/2,passwordField.getY() - GameConstants.row_height -15);
         startBtn.addListener(new InputListener(){
             @Override

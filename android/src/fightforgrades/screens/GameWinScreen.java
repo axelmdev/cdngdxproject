@@ -1,4 +1,4 @@
-package fr.imie.ena.fightforgrades.screens;
+package fightforgrades.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -6,29 +6,27 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import fr.imie.ena.fightforgrades.FightForGrades;
+import fightforgrades.FightForGrades;
 
 /**
  * Created by nicol on 16/07/2018.
  */
 
-public class GameOverScreen implements Screen {
+public class GameWinScreen implements Screen {
 
     private Viewport viewport;
     private Stage stage;
 
     private Game game;
 
-    public GameOverScreen(Game game){
+    public GameWinScreen(Game game){
         this.game = game;
         viewport = new FitViewport(FightForGrades.V_WIDTH, FightForGrades.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((FightForGrades) game).batch);
@@ -39,8 +37,8 @@ public class GameOverScreen implements Screen {
         table.center();
         table.setFillParent(true);
 
-        Label gameOverLabel = new Label("GAME OVER", font);
-        Label playAgainLabel = new Label("Click to Play Again", font);
+        Label gameOverLabel = new Label("WIN", font);
+        Label playAgainLabel = new Label("Return to menu", font);
         table.add(gameOverLabel).expandX();
         table.row();
         table.add(playAgainLabel).expandX().padTop(10f);
@@ -57,7 +55,7 @@ public class GameOverScreen implements Screen {
     @Override
     public void render(float delta) {
         if(Gdx.input.justTouched()){
-            game.setScreen(new PlayScreen((FightForGrades) game));
+            game.setScreen(new MainMenuScreen((FightForGrades) game));
             dispose();
         }
 

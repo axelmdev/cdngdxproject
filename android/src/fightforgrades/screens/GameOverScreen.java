@@ -1,4 +1,4 @@
-package fr.imie.ena.fightforgrades.screens;
+package fightforgrades.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -13,20 +13,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import fr.imie.ena.fightforgrades.FightForGrades;
+import fightforgrades.FightForGrades;
 
 /**
  * Created by nicol on 16/07/2018.
  */
 
-public class GameWinScreen implements Screen {
+public class GameOverScreen implements Screen {
 
     private Viewport viewport;
     private Stage stage;
 
     private Game game;
 
-    public GameWinScreen(Game game){
+    public GameOverScreen(Game game){
         this.game = game;
         viewport = new FitViewport(FightForGrades.V_WIDTH, FightForGrades.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((FightForGrades) game).batch);
@@ -37,8 +37,8 @@ public class GameWinScreen implements Screen {
         table.center();
         table.setFillParent(true);
 
-        Label gameOverLabel = new Label("WIN", font);
-        Label playAgainLabel = new Label("Return to menu", font);
+        Label gameOverLabel = new Label("GAME OVER", font);
+        Label playAgainLabel = new Label("Click to Play Again", font);
         table.add(gameOverLabel).expandX();
         table.row();
         table.add(playAgainLabel).expandX().padTop(10f);

@@ -1,4 +1,4 @@
-package fr.imie.ena.fightforgrades;
+package fightforgrades;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.SkinLoader;

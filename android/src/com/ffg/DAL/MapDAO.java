@@ -9,8 +9,6 @@ import com.ffg.Models.Map;
 
 import java.util.ArrayList;
 
-import fr.imie.ena.fightforgrades.character.Player;
-
 /**
  * Created by edern on 12/07/2018.
  */

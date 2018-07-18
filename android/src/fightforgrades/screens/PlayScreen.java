@@ -1,4 +1,4 @@
-package fr.imie.ena.fightforgrades.screens;
+package fightforgrades.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -11,11 +11,11 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import fr.imie.ena.fightforgrades.FightForGrades;
-import fr.imie.ena.fightforgrades.character.Enemy;
-import fr.imie.ena.fightforgrades.character.Player;
-import fr.imie.ena.fightforgrades.scenes.Hud;
-import fr.imie.ena.fightforgrades.tools.TiledMapStage;
+import fightforgrades.FightForGrades;
+import fightforgrades.character.Enemy;
+import fightforgrades.character.Player;
+import fightforgrades.scenes.Hud;
+import fightforgrades.tools.TiledMapStage;
 
 /**
  * Created by nicol on 28/03/2018.
@@ -41,7 +41,7 @@ public class PlayScreen implements Screen {
     Enemy ennemy;
 
 
-    public PlayScreen(FightForGrades game){
+    public PlayScreen(FightForGrades game, int buttonId){
         this.game = game;
 
         gamecam = new OrthographicCamera();
@@ -55,14 +55,32 @@ public class PlayScreen implements Screen {
 
         TiledMapTileLayer tileId = (TiledMapTileLayer)map.getLayers().get(0);
 
+        System.out.println("buttonid : "+buttonId);
+
+        switch(buttonId){
+            case 0:
+                player = new Player("Edge", 2, 6, 6, 67, 10, 2, 1, hud, game);
+                ennemy = new Enemy("Formateur", 2, 12, 6, 199, 5, 2, 1, hud, game);
+                break;
+
+            case 1:
+                player = new Player("Edge", 2, 6, 6, 67, 10, 2, 1, hud, game);
+                ennemy = new Enemy("Formateur", 2, 12, 6, 199, 5, 2, 1, hud, game);
+                break;
+
+            case 2:
+                player = new Player("Edge", 2, 6, 6, 67, 10, 2, 1, hud, game);
+                ennemy = new Enemy("Formateur", 2, 12, 6, 199, 5, 2, 1, hud, game);
+                break;
+        }
         //  Set player position
-        player = new Player("Player1", 2, 5, 2, 3,3, 67, hud, game);
+
         TiledMapTileLayer.Cell cell = tileId.getCell(player.positionX, player.positionY);
         cell.setTile(map.getTileSets().getTile(player.idTile));
         player.setCell(cell);
 
         // Set ennemy position
-        ennemy = new Enemy("Ennemy1", 2, 8, 1, 13, 3, 199, hud, game);
+
         TiledMapTileLayer.Cell ennemyCell = tileId.getCell(ennemy.positionX, ennemy.positionY);
         ennemyCell.setTile(map.getTileSets().getTile(ennemy.idTile));
         ennemy.setCell(ennemyCell);

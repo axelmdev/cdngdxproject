@@ -1,4 +1,4 @@
-package fr.imie.ena.fightforgrades;
+package fightforgrades;
 
 import com.badlogic.gdx.Gdx;
 

@@ -1,4 +1,4 @@
-package fr.imie.ena.fightforgrades.tools;
+package fightforgrades.tools;
 
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -6,9 +6,9 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import fr.imie.ena.fightforgrades.FightForGrades;
-import fr.imie.ena.fightforgrades.character.Enemy;
-import fr.imie.ena.fightforgrades.character.Player;
+import fightforgrades.FightForGrades;
+import fightforgrades.character.Enemy;
+import fightforgrades.character.Player;
 
 /**
  * Created by nicol on 28/03/2018.

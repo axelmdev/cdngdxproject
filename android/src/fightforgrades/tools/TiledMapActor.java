@@ -1,11 +1,10 @@
-package fr.imie.ena.fightforgrades.tools;
+package fightforgrades.tools;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 
-import fr.imie.ena.fightforgrades.character.Player;
+import fightforgrades.character.Player;
 
 
 /**

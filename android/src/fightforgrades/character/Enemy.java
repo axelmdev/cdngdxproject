@@ -1,11 +1,11 @@
-package fr.imie.ena.fightforgrades.character;
+package fightforgrades.character;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
-import fr.imie.ena.fightforgrades.scenes.Hud;
-import fr.imie.ena.fightforgrades.screens.GameOverScreen;
-import fr.imie.ena.fightforgrades.tools.TiledMapActor;
+import fightforgrades.scenes.Hud;
+import fightforgrades.screens.GameOverScreen;
+import fightforgrades.tools.TiledMapActor;
 
 /**
  * Created by nicol on 01/06/2018.
@@ -17,7 +17,7 @@ public class Enemy extends Character {
     private Hud hud;
     private Game game;
 
-    public Enemy(String name, int deplacements, int hp, int strenght, int positionX, int positionY, int idTile, Hud hud, Game game){
+    public Enemy(String name, int deplacements, int positionX, int positionY, int idTile, int hp, int strenght, int defense, Hud hud, Game game){
         this.name = name;
         this.deplacements = deplacements;
         this.positionX = positionX;

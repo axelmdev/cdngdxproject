@@ -1,8 +1,4 @@
-package fr.imie.ena.fightforgrades.character;
-
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-
-import fr.imie.ena.fightforgrades.tools.TiledMapActor;
+package fightforgrades.character;
 
 /**
  * Created by nicol on 01/06/2018.

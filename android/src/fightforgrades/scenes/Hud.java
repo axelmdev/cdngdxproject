@@ -1,4 +1,4 @@
-package fr.imie.ena.fightforgrades.scenes;
+package fightforgrades.scenes;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import fr.imie.ena.fightforgrades.FightForGrades;
+import fightforgrades.FightForGrades;
 
 /**
  * Created by nicol on 28/03/2018.

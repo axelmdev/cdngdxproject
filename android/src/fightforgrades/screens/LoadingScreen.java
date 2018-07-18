@@ -1,4 +1,4 @@
-package fr.imie.ena.fightforgrades.screens;
+package fightforgrades.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -9,8 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Align;
 
-import fr.imie.ena.fightforgrades.FightForGrades;
-import fr.imie.ena.fightforgrades.GameConstants;
+import fightforgrades.FightForGrades;
+import fightforgrades.GameConstants;
 
 public class LoadingScreen implements Screen {
 
@@ -30,8 +30,8 @@ public class LoadingScreen implements Screen {
         String password = passwordField.getText();
 
         Label gameTitle = new Label("Loading",mySkin,"big");
-        gameTitle.setSize(GameConstants.col_width*2,GameConstants.row_height*2);
-        gameTitle.setPosition(GameConstants.centerX - gameTitle.getWidth()/2,GameConstants.centerY + GameConstants.row_height);
+        gameTitle.setSize(GameConstants.col_width*2, GameConstants.row_height*2);
+        gameTitle.setPosition(GameConstants.centerX - gameTitle.getWidth()/2, GameConstants.centerY + GameConstants.row_height);
         gameTitle.setAlignment(Align.center);
         stage.addActor(gameTitle);
     }

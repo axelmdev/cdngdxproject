@@ -1,7 +1,7 @@
-package fr.imie.ena.fightforgrades.screens;
+package fightforgrades.screens;
 
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -12,8 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 
-import fr.imie.ena.fightforgrades.FightForGrades;
-import fr.imie.ena.fightforgrades.GameConstants;
+import fightforgrades.FightForGrades;
+import fightforgrades.GameConstants;
 
 /**
  * Created by Axel on 17/06/2018.
@@ -34,13 +34,13 @@ public class SettingsScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         Label gameTitle = new Label("Work in progress",mySkin,"big");
-        gameTitle.setSize(GameConstants.col_width*2,GameConstants.row_height*2);
-        gameTitle.setPosition(GameConstants.centerX - gameTitle.getWidth()/2,GameConstants.centerY + GameConstants.row_height);
+        gameTitle.setSize(GameConstants.col_width*2, GameConstants.row_height*2);
+        gameTitle.setPosition(GameConstants.centerX - gameTitle.getWidth()/2, GameConstants.centerY + GameConstants.row_height);
         gameTitle.setAlignment(Align.center);
 
         Button homeBtn = new TextButton("Return Home",mySkin,"default");
-        homeBtn.setSize(GameConstants.col_width*2,GameConstants.row_height);
-        homeBtn.setPosition(GameConstants.centerX - homeBtn.getWidth()/2,GameConstants.centerY);
+        homeBtn.setSize(GameConstants.col_width*2, GameConstants.row_height);
+        homeBtn.setPosition(GameConstants.centerX - homeBtn.getWidth()/2, GameConstants.centerY);
         homeBtn.addListener(new InputListener(){
 
             @Override

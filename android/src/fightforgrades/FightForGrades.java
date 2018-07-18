@@ -1,12 +1,13 @@
-package fr.imie.ena.fightforgrades;
+package fightforgrades;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 
-import fr.imie.ena.fightforgrades.screens.LoginScreen;
+import fightforgrades.screens.LoginScreen;
+import fightforgrades.screens.MainMenuScreen;
 
 public class FightForGrades extends Game {
 
@@ -26,7 +27,8 @@ public class FightForGrades extends Game {
         camera.setToOrtho(false);
         screenPort = new ScreenViewport();
 
-        this.setScreen(new LoginScreen(this));
+        //this.setScreen(new LoginScreen(this));
+        this.setScreen(new MainMenuScreen(this));
     }
 
     @Override
